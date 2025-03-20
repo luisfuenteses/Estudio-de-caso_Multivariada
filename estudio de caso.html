@@ -1,0 +1,2834 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ES-es" xml:lang="ES-es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Fuentes-Sáenz, Luis - Uribe-Lache, Julian - Sánchez-Charris, Vanessa">
+<meta name="description" content="Se realizarán algunos ejercicios con el objetivo de fortalecer destrezas en manejo y análisis de bases de datos.">
+
+<title>Estudio de caso: Diversity and longitudinal distribution of fishes in the Soto La Marina River basin, Mexico, and relationship with environmental variables</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="estudio de caso_files/libs/clipboard/clipboard.min.js"></script>
+<script src="estudio de caso_files/libs/quarto-html/quarto.js"></script>
+<script src="estudio de caso_files/libs/quarto-html/popper.min.js"></script>
+<script src="estudio de caso_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="estudio de caso_files/libs/quarto-html/anchor.min.js"></script>
+<link href="estudio de caso_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="estudio de caso_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="estudio de caso_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="estudio de caso_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="estudio de caso_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<style>
+
+      .quarto-title-block .quarto-title-banner {
+        background: #2ca25f;
+      }
+</style>
+<script src="estudio de caso_files/libs/kePrint-0.0.1/kePrint.js"></script>
+
+<link href="estudio de caso_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+
+<link rel="stylesheet" href="styles2.css">
+</head>
+
+<body>
+
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Estudio de caso: Diversity and longitudinal distribution of fishes in the Soto La Marina River basin, Mexico, and relationship with environmental variables</h1>
+            <p class="subtitle lead">Estudio de caso para la aplicación de estadíastica multivariada</p>
+                  <div>
+        <div class="description">
+          Se realizarán algunos ejercicios con el objetivo de fortalecer destrezas en manejo y análisis de bases de datos.
+        </div>
+      </div>
+                </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Autor/a</div>
+      <div class="quarto-title-meta-contents">
+               <p><a href="https://www.unimagdalena.edu.co/">Fuentes-Sáenz, Luis - Uribe-Lache, Julian - Sánchez-Charris, Vanessa</a> </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Fecha de publicación</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">16 de marzo de 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Menú flotante</h2>
+   
+  <ul>
+  <li><a href="#contexto-de-la-base-de-datos" id="toc-contexto-de-la-base-de-datos" class="nav-link active" data-scroll-target="#contexto-de-la-base-de-datos">Contexto de la base de datos</a></li>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link" data-scroll-target="#introducción">Introducción</a></li>
+  <li><a href="#objetivos" id="toc-objetivos" class="nav-link" data-scroll-target="#objetivos">Objetivos</a>
+  <ul>
+  <li><a href="#objetivo-general" id="toc-objetivo-general" class="nav-link" data-scroll-target="#objetivo-general">Objetivo General:</a></li>
+  <li><a href="#objetivos-específicos" id="toc-objetivos-específicos" class="nav-link" data-scroll-target="#objetivos-específicos">Objetivos Específicos:</a></li>
+  </ul></li>
+  <li><a href="#diagrama-de-flujo" id="toc-diagrama-de-flujo" class="nav-link" data-scroll-target="#diagrama-de-flujo">Diagrama de flujo</a></li>
+  <li><a href="#librerías-requeridas" id="toc-librerías-requeridas" class="nav-link" data-scroll-target="#librerías-requeridas">Librerías requeridas</a></li>
+  <li><a href="#base-de-datos" id="toc-base-de-datos" class="nav-link" data-scroll-target="#base-de-datos">Base de datos</a></li>
+  <li><a href="#abundancia-por-sitios" id="toc-abundancia-por-sitios" class="nav-link" data-scroll-target="#abundancia-por-sitios">Abundancia por sitios</a></li>
+  <li><a href="#taxones-más-abundantes" id="toc-taxones-más-abundantes" class="nav-link" data-scroll-target="#taxones-más-abundantes">Taxones más abundantes</a></li>
+  <li><a href="#resumen-estadístico-de-la-base-de-datos-biológica" id="toc-resumen-estadístico-de-la-base-de-datos-biológica" class="nav-link" data-scroll-target="#resumen-estadístico-de-la-base-de-datos-biológica">Resumen estadístico de la base de datos biológica</a></li>
+  <li><a href="#resumen-estadístico-de-la-base-de-datos-ambiental" id="toc-resumen-estadístico-de-la-base-de-datos-ambiental" class="nav-link" data-scroll-target="#resumen-estadístico-de-la-base-de-datos-ambiental">Resumen estadístico de la base de datos ambiental</a></li>
+  <li><a href="#figura-de-elipises-con-las-15-especies-más-abundantes" id="toc-figura-de-elipises-con-las-15-especies-más-abundantes" class="nav-link" data-scroll-target="#figura-de-elipises-con-las-15-especies-más-abundantes">Figura de elipises con las 15 especies más abundantes</a></li>
+  <li><a href="#figura-de-elipses-de-los-datos-ambientales-fisicoquímicos" id="toc-figura-de-elipses-de-los-datos-ambientales-fisicoquímicos" class="nav-link" data-scroll-target="#figura-de-elipses-de-los-datos-ambientales-fisicoquímicos">Figura de elipses de los datos ambientales fisicoquímicos</a></li>
+  <li><a href="#figura-de-elipses-de-los-datos-ambientales-y-biológicos-con-las-abundancias-convertidas-a-logaritmo-log10" id="toc-figura-de-elipses-de-los-datos-ambientales-y-biológicos-con-las-abundancias-convertidas-a-logaritmo-log10" class="nav-link" data-scroll-target="#figura-de-elipses-de-los-datos-ambientales-y-biológicos-con-las-abundancias-convertidas-a-logaritmo-log10">Figura de elipses de los datos ambientales y biológicos con las abundancias convertidas a logaritmo (<code>log10</code>)</a></li>
+  <li><a href="#nueva-columna-con-los-ríos-a-los-que-pertenece-cada-sitio-muestreado" id="toc-nueva-columna-con-los-ríos-a-los-que-pertenece-cada-sitio-muestreado" class="nav-link" data-scroll-target="#nueva-columna-con-los-ríos-a-los-que-pertenece-cada-sitio-muestreado">Nueva columna con los ríos a los que pertenece cada sitio muestreado</a></li>
+  <li><a href="#relacion-entre-la-abundancia-y-el-ph" id="toc-relacion-entre-la-abundancia-y-el-ph" class="nav-link" data-scroll-target="#relacion-entre-la-abundancia-y-el-ph">Relacion entre la abundancia y el pH</a></li>
+  <li><a href="#relacion-entre-la-abundancia-y-la-alcalinidad" id="toc-relacion-entre-la-abundancia-y-la-alcalinidad" class="nav-link" data-scroll-target="#relacion-entre-la-abundancia-y-la-alcalinidad">Relacion entre la abundancia y la Alcalinidad</a></li>
+  <li><a href="#regresión-lineal-entre-la-abundancia-y-la-alcalinidad" id="toc-regresión-lineal-entre-la-abundancia-y-la-alcalinidad" class="nav-link" data-scroll-target="#regresión-lineal-entre-la-abundancia-y-la-alcalinidad">Regresión lineal entre la abundancia y la Alcalinidad</a></li>
+  <li><a href="#regresión-suavizada-entre-la-abundancia-y-la-alcalinidad" id="toc-regresión-suavizada-entre-la-abundancia-y-la-alcalinidad" class="nav-link" data-scroll-target="#regresión-suavizada-entre-la-abundancia-y-la-alcalinidad">Regresión suavizada entre la abundancia y la Alcalinidad</a></li>
+  <li><a href="#regresión-lineal-entre-la-abundancia-y-el-ph" id="toc-regresión-lineal-entre-la-abundancia-y-el-ph" class="nav-link" data-scroll-target="#regresión-lineal-entre-la-abundancia-y-el-ph">Regresión lineal entre la abundancia y el pH</a></li>
+  <li><a href="#regresión-suavizada-entre-la-abundancia-y-el-ph" id="toc-regresión-suavizada-entre-la-abundancia-y-el-ph" class="nav-link" data-scroll-target="#regresión-suavizada-entre-la-abundancia-y-el-ph">Regresión suavizada entre la abundancia y el pH</a></li>
+  <li><a href="#grafico-de-burbujas" id="toc-grafico-de-burbujas" class="nav-link" data-scroll-target="#grafico-de-burbujas">Grafico de burbujas</a></li>
+  <li><a href="#referencias-bibliográficas" id="toc-referencias-bibliográficas" class="nav-link" data-scroll-target="#referencias-bibliográficas">Referencias bibliográficas</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<hr>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="foto%20artículo.png" class="img-fluid quarto-figure quarto-figure-left figure-img"></p>
+</figure>
+</div>
+<p>DOI: <a href="https://doi.org/10.1007/s10641-021-01158-9" class="uri">https://doi.org/10.1007/s10641-021-01158-9</a></p>
+<hr>
+<section id="contexto-de-la-base-de-datos" class="level2">
+<h2 class="anchored" data-anchor-id="contexto-de-la-base-de-datos">Contexto de la base de datos</h2>
+<p>Las bases de datos están compuestas por dos archivos de Excel que contienen datos biológicos y ambientales. En la base de datos biológicos, se encuentran columnas de 90 especies y en las filas las localidades, estas están identificadas con las iniciales M (montaña), P (llanura) y RM (desembocadura de río), indicando la altitud de cada sitio, y están numeradas del 1 al 43. La base de datos ambientales esta constituida por 23 variables ambientales de las cuales 7 variables son cuantitativas y 16 cualitativas. Además, se midieron 9 parámetros de calidad de agua en cada sitio.</p>
+<hr>
+</section>
+<section id="introducción" class="level2">
+<h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
+<p>La comprensión de los patrones de diversidad y distribución de las comunidades acuáticas es fundamental al abordar los sistemas fluviales, porque son determinantes para la ecología acuática contemporánea. Estos patrones han reflejado la interacción entre factores bióticos y abióticos, así como han servido como indicadores de la salud ecosistémica de integridad hidrológica (Ospina et al., 2023). Los peces son uno de los grupos más diversos y ecológicamente significativos de la fauna que habita el ecosistema. La variación longitudinal crea, de hecho, gradientes ambientales que modelan la estructura de las comunidades de peces, tanto en los sistemas neotropicales como en los templados (Ospina et al., 2023; Torruco et al., 2017). Sin embargo, la incertidumbre de los controladores de estos sistemas con relación a la dimensionalidad de las variables ambientales y biológicas sólo puede abordarse a partir de un análisis capaz de juntar disímiles informaciones en patrones ecológicos significativos. Es por esta razón que se emplea la estadística multivariada.</p>
+<p>Como buena parte de la ciencia moderna, la ecología ha evolucionado de enfoques más sencillos hacia el uso de modelos estadísticos multivariantes. En este caso, la multi-variedad proporciona a los ecólogos la posibilidad de responder a preguntas complejas sobre la estratificación de la comunidad (De Catalunya et al., 2018). La evolución posterior, en el contexto del software estadístico en general y del lenguaje R en particular, ha permitido que un número cada vez mayor de ecólogos formule y analice hipótesis complejas y multivariantes dentro de flujos de trabajo reproducibles y personalizados (González, 2017).<br>
+El presente estudio analiza la diversidad y la distribución longitudinal de comunidades de peces en un sistema fluvial a partir de la interpretación de datos de una investigación precedente usando técnicas estadísticas multivariadas. Asimismo, el objetivo es investigar los patrones espaciales de distribución y diversidad de peces y tratar de explicar qué variables ambientales son responsables de la composición de especies en la ictiofauna a lo largo del sistema fluvial de la mejor manera posible.</p>
+<p>La investigación también intenta delimitar áreas o segmentos que probablemente tengan algunas características distinguibles desde el punto de vista de la estructura de la comunidad de peces y probar la efectividad de diferentes análisis multivariados en la descripción de patrones ecológicos en los ensamblajes de peces. Esto finalmente para producir un modelo conceptual de distribución de peces en relación con los gradientes ambientales que ayude en la gestión y conservación de los ecosistemas acuáticos.</p>
+<hr>
+</section>
+<section id="objetivos" class="level2">
+<h2 class="anchored" data-anchor-id="objetivos">Objetivos</h2>
+<section id="objetivo-general" class="level3">
+<h3 class="anchored" data-anchor-id="objetivo-general">Objetivo General:</h3>
+<p>Analizar la diversidad y distribución longitudinal de las comunidades de peces en un sistema fluvial mediante el uso de técnicas estadísticas multivariadas y modelos espaciales de predicción, con el fin de identificar patrones ecológicos y su relación con gradientes ambientales.</p>
+</section>
+<section id="objetivos-específicos" class="level3">
+<h3 class="anchored" data-anchor-id="objetivos-específicos">Objetivos Específicos:</h3>
+<ol type="1">
+<li><p>Identificar las variables ambientales que mejor explican la composición de especies de peces en los distintos segmentos del sistema fluvial.</p></li>
+<li><p>Evaluar la efectividad de distintos métodos de análisis multivariado en la detección de patrones espaciales de distribución y ensamblajes ícticos en el sistema fluvial estudiado.</p></li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="diagrama-de-flujo" class="level2">
+<h2 class="anchored" data-anchor-id="diagrama-de-flujo">Diagrama de flujo</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Diagrama%20de%20flujo.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<hr>
+</section>
+<section id="librerías-requeridas" class="level2">
+<h2 class="anchored" data-anchor-id="librerías-requeridas">Librerías requeridas</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)   <span class="co"># Para la edición de tablas</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)       <span class="co"># Cargar bases de Excel</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(stats)        <span class="co"># No se requiere instalar</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lattice)      <span class="co"># No se requiere instalar</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)      <span class="co"># insertar rótulos a los puntos</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(SciViews)     <span class="co"># Fig. dispersión con coef. de pearson</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotrix)      <span class="co"># Figuras de cajas con múltiples variables</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot)     <span class="co"># Figuras de elipses</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)        <span class="co"># Matrices de correlación para figuras de elipses</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape)      <span class="co"># Figuras de cajas con múltiples variables</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)     <span class="co"># Figuras de cajas con múltiples variables </span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)    <span class="co"># Para figuras estadísticas (varios factores)</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(grid)         <span class="co"># Para figuras estadísticas (varios factores)</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)      <span class="co"># Paquete gráfico</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)      <span class="co"># Para manipulación de factores</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis)      <span class="co"># Opciones de paletas de colores</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+<section id="base-de-datos" class="level2">
+<h2 class="anchored" data-anchor-id="base-de-datos">Base de datos</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Leer la base de datos</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>biol <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"peces marinos méxico_biológicos.xlsx"</span>, <span class="at">col_names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>amb <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"peces marinos méxico_ambientales.xlsx"</span>, <span class="at">col_names =</span> <span class="cn">TRUE</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertir de formato largo a ancho los datos biológicos</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>largo_biol <span class="ot">&lt;-</span> biol <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">90</span>,  <span class="co"># Seleccionamos las columnas de especies</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"Especie"</span>,  <span class="co"># Nueva columna con los nombres de las especies</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"Abundancia"</span>)  <span class="co"># Nueva columna con los valores de abundancia</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertir de formato largo a ancho los datos ambientales</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>largo_amb <span class="ot">&lt;-</span> amb <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">38</span>,  <span class="co"># Seleccionamos las columnas de especies</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"Variables"</span>,  <span class="co"># Nueva columna con los nombres de las especies</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"Valores"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+<section id="abundancia-por-sitios" class="level2">
+<h2 class="anchored" data-anchor-id="abundancia-por-sitios">Abundancia por sitios</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>largo_biol <span class="ot">&lt;-</span> largo_biol <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Sitios) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Abundancia_Total_Sitio =</span> <span class="fu">sum</span>(Abundancia, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Resumen de la base de datos original (seis primeras filas)</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(largo_biol) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  Sitios Especie              Abundancia Abundancia_Total_Sitio
+  &lt;chr&gt;  &lt;chr&gt;                     &lt;dbl&gt;                  &lt;dbl&gt;
+1 17M    Hypanus sabinus               0                     95
+2 17M    Atractosteus spatula          0                     95
+3 17M    Elops saurus                  0                     95
+4 17M    Megalops atlanticus           0                     95
+5 17M    Albula vulpes                 0                     95
+6 17M    Anguila rostrata              0                     95</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generar una nueva columna con valores abreviados en biol</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>largo_biol <span class="ot">&lt;-</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  largo_biol <span class="sc">%&gt;%</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Abrev =</span> <span class="fu">abbreviate</span>(Especie, <span class="at">minlength =</span> <span class="dv">4</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Unir bases de datos</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>biol_amb <span class="ot">&lt;-</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  amb <span class="sc">%&gt;%</span> </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(largo_biol, <span class="at">by=</span> <span class="st">"Sitios"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+<section id="taxones-más-abundantes" class="level2">
+<h2 class="anchored" data-anchor-id="taxones-más-abundantes">Taxones más abundantes</h2>
+<p>La <a href="#fig-fig1" class="quarto-xref">Figura&nbsp;1</a> muestra las 30 especies más abundantes en los diferentes ríos muestreados. Se observa que la especie <em>Poecilia mexicana</em> es la más abundante con un total de 5.573 registros, seguida de la especie <em>Astyanax mexicanus</em> con 4.105 registros, indicando que son especies muy comunes en los sitios de estudio.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Seleccionar los 15 taxones más abundantes</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  Abundantes <span class="ot">&lt;-</span> largo_biol <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Especie, Abrev) <span class="sc">%&gt;%</span>  <span class="co"># Agrupar por especie y abreviatura</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Abundancia_Total =</span> <span class="fu">sum</span>(Abundancia, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span>  <span class="co"># Eliminar el agrupamiento</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Abundancia_Total)) <span class="sc">%&gt;%</span>  <span class="co"># Ordenar de mayor a menor</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">30</span>)  <span class="co"># Seleccionar los 15 taxones más abundantes</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizar tabla</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>Abundantes <span class="sc">%&gt;%</span> </span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-fig1" class="cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Especie
+</th>
+<th style="text-align:left;">
+Abrev
+</th>
+<th style="text-align:right;">
+Abundancia_Total
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Poecilia mexicana
+</td>
+<td style="text-align:left;">
+Pclm
+</td>
+<td style="text-align:right;">
+5573
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Astyanax mexicanus
+</td>
+<td style="text-align:left;">
+Astm
+</td>
+<td style="text-align:right;">
+4105
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Herichthys cyanoguttatus
+</td>
+<td style="text-align:left;">
+Hrcc
+</td>
+<td style="text-align:right;">
+1618
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gambusia regani
+</td>
+<td style="text-align:left;">
+Gmbr
+</td>
+<td style="text-align:right;">
+1519
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Poecilia formosa
+</td>
+<td style="text-align:left;">
+Pclf
+</td>
+<td style="text-align:right;">
+1222
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Notropis aguirrepequeñoi
+</td>
+<td style="text-align:left;">
+Nagñ
+</td>
+<td style="text-align:right;">
+996
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gambusia affinis
+</td>
+<td style="text-align:left;">
+Gmbsaf
+</td>
+<td style="text-align:right;">
+538
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gambusia sp.
+</td>
+<td style="text-align:left;">
+Gsp.
+</td>
+<td style="text-align:right;">
+522
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Micropterus spp.
+</td>
+<td style="text-align:left;">
+Msp.
+</td>
+<td style="text-align:right;">
+469
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Aplodinotus grunniens
+</td>
+<td style="text-align:left;">
+Aplg
+</td>
+<td style="text-align:right;">
+316
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dorosoma petenense
+</td>
+<td style="text-align:left;">
+Drsp
+</td>
+<td style="text-align:right;">
+255
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Oreochromis aureus
+</td>
+<td style="text-align:left;">
+Orca
+</td>
+<td style="text-align:right;">
+192
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Moxostoma congestum
+</td>
+<td style="text-align:left;">
+Mxsc
+</td>
+<td style="text-align:right;">
+187
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dorosoma cepedianum
+</td>
+<td style="text-align:left;">
+Drsc
+</td>
+<td style="text-align:right;">
+184
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ariopsis felis
+</td>
+<td style="text-align:left;">
+Arpf
+</td>
+<td style="text-align:right;">
+162
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Xiphophorus variatus
+</td>
+<td style="text-align:left;">
+Xphv
+</td>
+<td style="text-align:right;">
+145
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gambusia aurata
+</td>
+<td style="text-align:left;">
+Gmbsar
+</td>
+<td style="text-align:right;">
+135
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dionda sp.
+</td>
+<td style="text-align:left;">
+Dsp.
+</td>
+<td style="text-align:right;">
+104
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lepomis macrochirus
+</td>
+<td style="text-align:left;">
+Lpmm
+</td>
+<td style="text-align:right;">
+102
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fundulus grandis
+</td>
+<td style="text-align:left;">
+Fndg
+</td>
+<td style="text-align:right;">
+88
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Membras martinica
+</td>
+<td style="text-align:left;">
+Mmbm
+</td>
+<td style="text-align:right;">
+60
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Eucinostomus melanopterus
+</td>
+<td style="text-align:left;">
+Ecnm
+</td>
+<td style="text-align:right;">
+58
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gobiomorus dormitor
+</td>
+<td style="text-align:left;">
+Gbmd
+</td>
+<td style="text-align:right;">
+46
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Poecilia latipinna
+</td>
+<td style="text-align:left;">
+Pcll
+</td>
+<td style="text-align:right;">
+44
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ictalurus sp.
+</td>
+<td style="text-align:left;">
+Isp.
+</td>
+<td style="text-align:right;">
+40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Etropus crossotus
+</td>
+<td style="text-align:left;">
+Etrc
+</td>
+<td style="text-align:right;">
+36
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Herichthys labridens
+</td>
+<td style="text-align:left;">
+Hrcl
+</td>
+<td style="text-align:right;">
+33
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Campostoma anomalum
+</td>
+<td style="text-align:left;">
+Cmpa
+</td>
+<td style="text-align:right;">
+31
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Harengula jaguana
+</td>
+<td style="text-align:left;">
+Hrnj
+</td>
+<td style="text-align:right;">
+29
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Strongylura timucu
+</td>
+<td style="text-align:left;">
+Strt
+</td>
+<td style="text-align:right;">
+27
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1: Abundancia de Especies de Peces (30 más abundantes) en la cuenca del río Soto La Marina, México.
+</figcaption>
+</figure>
+</div>
+</div>
+<hr>
+</section>
+<section id="resumen-estadístico-de-la-base-de-datos-biológica" class="level2">
+<h2 class="anchored" data-anchor-id="resumen-estadístico-de-la-base-de-datos-biológica">Resumen estadístico de la base de datos biológica</h2>
+<p>La <a href="#fig-fig2" class="quarto-xref">Figura&nbsp;2</a> muestra un resumen estadístico de los datos biológicos en el sitio de estudio. Se puede observar que el sitio <strong>35M</strong> destaca con la mayor abundancia media (<strong>~24</strong>) y el valor máximo más alto (<strong>1543</strong>), por el contrario, el sitio <strong>1M</strong> tiene la menor abundancia media (<strong>0.14</strong>) y el máximo más bajo (<strong>10</strong>). La desviación estándar (SD) refleja la variabilidad en la abundancia dentro de cada sitio. Sitios como <strong>35M</strong> y <strong>26M</strong> muestran una alta variabilidad (SD de <strong>167.5</strong> y <strong>150.5</strong>, respectivamente), Por otro lado, sitios como <strong>1M</strong> y <strong>9P</strong> tienen una variabilidad baja (SD de <strong>1.10</strong> y <strong>1.77</strong>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Resumen estadístico de la base biológica</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>resumen_biologico <span class="ot">&lt;-</span> largo_biol <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Sitios) <span class="sc">%&gt;%</span>  <span class="co"># Agrupar por sitio</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Abundancia_Media =</span> <span class="fu">mean</span>(Abundancia, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Abundancia_Min =</span> <span class="fu">min</span>(Abundancia, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Abundancia_Max =</span> <span class="fu">max</span>(Abundancia, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">Abundancia_SD =</span> <span class="fu">sd</span>(Abundancia, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span>  <span class="co"># Evita mensajes sobre agrupación</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>resumen_biologico <span class="sc">%&gt;%</span> </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-fig2" class="cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Sitios
+</th>
+<th style="text-align:right;">
+Abundancia_Media
+</th>
+<th style="text-align:right;">
+Abundancia_Min
+</th>
+<th style="text-align:right;">
+Abundancia_Max
+</th>
+<th style="text-align:right;">
+Abundancia_SD
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+10P
+</td>
+<td style="text-align:right;">
+0.8426966
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:right;">
+3.243521
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+11M
+</td>
+<td style="text-align:right;">
+2.0337079
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+79
+</td>
+<td style="text-align:right;">
+9.898863
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12M
+</td>
+<td style="text-align:right;">
+0.8764045
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+38
+</td>
+<td style="text-align:right;">
+5.202316
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+13M
+</td>
+<td style="text-align:right;">
+0.9887640
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+32
+</td>
+<td style="text-align:right;">
+4.427431
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+14M
+</td>
+<td style="text-align:right;">
+2.3932584
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+106
+</td>
+<td style="text-align:right;">
+13.558474
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+15P
+</td>
+<td style="text-align:right;">
+0.9213483
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:right;">
+3.049682
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+16P
+</td>
+<td style="text-align:right;">
+5.9887640
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+213
+</td>
+<td style="text-align:right;">
+27.434009
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+17M
+</td>
+<td style="text-align:right;">
+1.0674157
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+32
+</td>
+<td style="text-align:right;">
+4.574628
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+18M
+</td>
+<td style="text-align:right;">
+1.0898876
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+45
+</td>
+<td style="text-align:right;">
+5.564989
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+19P
+</td>
+<td style="text-align:right;">
+1.1136364
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:right;">
+4.337571
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1M
+</td>
+<td style="text-align:right;">
+0.1460674
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+1.103204
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20M
+</td>
+<td style="text-align:right;">
+3.8202247
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+95
+</td>
+<td style="text-align:right;">
+16.452799
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+21P
+</td>
+<td style="text-align:right;">
+17.8089888
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+630
+</td>
+<td style="text-align:right;">
+82.470363
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+22P
+</td>
+<td style="text-align:right;">
+7.8089888
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+313
+</td>
+<td style="text-align:right;">
+39.636954
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+23P
+</td>
+<td style="text-align:right;">
+2.3932584
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+108
+</td>
+<td style="text-align:right;">
+12.093028
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+24P
+</td>
+<td style="text-align:right;">
+4.3932584
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+103
+</td>
+<td style="text-align:right;">
+18.667922
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+25M
+</td>
+<td style="text-align:right;">
+4.7865169
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+426
+</td>
+<td style="text-align:right;">
+45.155910
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+26M
+</td>
+<td style="text-align:right;">
+23.9775281
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1372
+</td>
+<td style="text-align:right;">
+150.576995
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+27P
+</td>
+<td style="text-align:right;">
+4.4044944
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+255
+</td>
+<td style="text-align:right;">
+28.787118
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+28M
+</td>
+<td style="text-align:right;">
+0.8539326
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+76
+</td>
+<td style="text-align:right;">
+8.055984
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+29M
+</td>
+<td style="text-align:right;">
+8.1123596
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+432
+</td>
+<td style="text-align:right;">
+48.656831
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2M
+</td>
+<td style="text-align:right;">
+11.7977528
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+529
+</td>
+<td style="text-align:right;">
+63.056104
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+30M
+</td>
+<td style="text-align:right;">
+4.0898876
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+210
+</td>
+<td style="text-align:right;">
+24.244794
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+31M
+</td>
+<td style="text-align:right;">
+18.7977528
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+972
+</td>
+<td style="text-align:right;">
+109.298505
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+32M
+</td>
+<td style="text-align:right;">
+0.6741573
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+29
+</td>
+<td style="text-align:right;">
+3.942125
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+33M
+</td>
+<td style="text-align:right;">
+4.9213483
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+330
+</td>
+<td style="text-align:right;">
+35.231773
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+34M
+</td>
+<td style="text-align:right;">
+2.1460674
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+67
+</td>
+<td style="text-align:right;">
+10.433284
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+35M
+</td>
+<td style="text-align:right;">
+23.7865169
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1543
+</td>
+<td style="text-align:right;">
+167.557281
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+36M
+</td>
+<td style="text-align:right;">
+8.3707865
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+333
+</td>
+<td style="text-align:right;">
+44.628360
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+37P
+</td>
+<td style="text-align:right;">
+4.7752809
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+206
+</td>
+<td style="text-align:right;">
+25.833713
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+38M
+</td>
+<td style="text-align:right;">
+8.7078652
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+338
+</td>
+<td style="text-align:right;">
+41.540014
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+39P
+</td>
+<td style="text-align:right;">
+0.6966292
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:right;">
+3.145720
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3P
+</td>
+<td style="text-align:right;">
+0.7191011
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+34
+</td>
+<td style="text-align:right;">
+3.855306
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+40P
+</td>
+<td style="text-align:right;">
+1.7078652
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+58
+</td>
+<td style="text-align:right;">
+7.286666
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+41P
+</td>
+<td style="text-align:right;">
+0.4943820
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+1.966328
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+42RM
+</td>
+<td style="text-align:right;">
+0.9887640
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+2.107855
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+43RM
+</td>
+<td style="text-align:right;">
+3.6629213
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+58
+</td>
+<td style="text-align:right;">
+10.255757
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4M
+</td>
+<td style="text-align:right;">
+10.3820225
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+475
+</td>
+<td style="text-align:right;">
+57.111037
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5M
+</td>
+<td style="text-align:right;">
+0.6516854
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:right;">
+3.100957
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6P
+</td>
+<td style="text-align:right;">
+1.4157303
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+71
+</td>
+<td style="text-align:right;">
+7.892472
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7P
+</td>
+<td style="text-align:right;">
+6.3932584
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+263
+</td>
+<td style="text-align:right;">
+34.085660
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+8M
+</td>
+<td style="text-align:right;">
+3.4606742
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+155
+</td>
+<td style="text-align:right;">
+20.131418
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9P
+</td>
+<td style="text-align:right;">
+0.4044944
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+1.775586
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;2: Resumen estadístico de la abundancia de peces en la cuenca del río Soto La Marina, México.
+</figcaption>
+</figure>
+</div>
+</div>
+<hr>
+</section>
+<section id="resumen-estadístico-de-la-base-de-datos-ambiental" class="level2">
+<h2 class="anchored" data-anchor-id="resumen-estadístico-de-la-base-de-datos-ambiental">Resumen estadístico de la base de datos ambiental</h2>
+<p>En la <a href="#fig-fig3" class="quarto-xref">Figura&nbsp;3</a> muestra un resumen estadístico de los datos ambientales en el sitio de estudio. Se observa que el pH muestra una media de <strong>7.54</strong>, con valores que oscilan entre <strong>6.5</strong> y <strong>8.4</strong>, lo que indica un ambiente predominantemente neutro a ligeramente alcalino. La temperatura del agua tiene una media de <strong>26.73°C</strong>. La conductividad, con una media de <strong>636.20 µS/cm</strong> y un máximo de <strong>1655 µS/cm</strong>, refleja diferencias en la concentración de iones disueltos, posiblemente relacionadas con la presencia de sales u otros compuestos. El oxígeno disuelto, con una media de <strong>6.7 mg/L</strong>, muestra una amplia variabilidad (desde&nbsp;<strong>1.2 mg/L</strong>&nbsp;hasta&nbsp;<strong>24.9 mg/L</strong>), lo que podría indicar diferencias en la calidad del agua y la actividad fotosintética. Los nutrientes como nitritos (NO₂), nitratos (NO₃) y amonio (NH₄⁺) presentan concentraciones bajas en general, con medias de <strong>0.02 mg/L</strong>, <strong>0.5 mg/L</strong> y <strong>1.47 mg/L</strong>, respectivamente, lo que sugiere una limitada contaminación por compuestos nitrogenados. Los fosfatos, con una media de <strong>0.21 mg/L</strong>, también indican bajos niveles de contaminación por fósforo. En cuanto a la varianza, la conductividad presentó los valores más altos (<strong>138764.83 µS/cm</strong>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecciona solo las variables ambientales de interés</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>variables_seleccionadas <span class="ot">&lt;-</span> amb <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">`</span><span class="at">pH</span><span class="st">`</span>, <span class="st">`</span><span class="at">Water temperature</span><span class="st">`</span>, <span class="st">`</span><span class="at">Conductivity</span><span class="st">`</span>, </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Salinity</span><span class="st">`</span>, <span class="st">`</span><span class="at">Transparency</span><span class="st">`</span>, <span class="st">`</span><span class="at">Oxygen</span><span class="st">`</span>, </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Carbon Dioxide</span><span class="st">`</span>, <span class="st">`</span><span class="at">Alkalinity</span><span class="st">`</span>, <span class="st">`</span><span class="at">NO2</span><span class="st">`</span>, </span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">NO3</span><span class="st">`</span>, <span class="st">`</span><span class="at">Ammonium</span><span class="st">`</span>, <span class="st">`</span><span class="at">Hardness</span><span class="st">`</span>, </span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Phosphates</span><span class="st">`</span>, <span class="st">`</span><span class="at">TDS</span><span class="st">`</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Resumen estadístico de las variables seleccionadas</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>resumen_ambiental <span class="ot">&lt;-</span> variables_seleccionadas <span class="sc">%&gt;%</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), </span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">list</span>(<span class="at">Media =</span> <span class="sc">~</span> <span class="fu">round</span> (<span class="fu">mean</span>(., <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">2</span>),</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>                        <span class="at">Minimo =</span> <span class="sc">~</span> <span class="fu">round</span> (<span class="fu">min</span>(., <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">2</span>),</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>                        <span class="at">Maximo =</span> <span class="sc">~</span> <span class="fu">round</span> (<span class="fu">max</span>(., <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">2</span>),</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>                        <span class="at">DE =</span> <span class="sc">~</span> <span class="fu">round</span> (<span class="fu">sd</span>(., <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">2</span>),</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>                        <span class="at">Varianza =</span> <span class="sc">~</span> <span class="fu">round</span> (<span class="fu">var</span>(., <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">2</span>),</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>                        <span class="at">Rango =</span> <span class="sc">~</span> <span class="fu">round</span> (<span class="fu">max</span>(., <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">-</span> <span class="fu">min</span>(., <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">2</span>),</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>                        <span class="at">Q1 =</span> <span class="sc">~</span> <span class="fu">round</span> (<span class="fu">quantile</span>(., <span class="at">probs =</span> <span class="fl">0.25</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">2</span>),</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>                        <span class="at">Q2 =</span> <span class="sc">~</span> <span class="fu">round</span> (<span class="fu">quantile</span>(., <span class="at">probs =</span> <span class="fl">0.50</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">2</span>),</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>                        <span class="at">Q3 =</span> <span class="sc">~</span> <span class="fu">round</span> (<span class="fu">quantile</span>(., <span class="at">probs =</span> <span class="fl">0.75</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">2</span>)))) <span class="sc">%&gt;%</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">everything</span>(), </span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"Variable"</span>, <span class="st">"Estadistico"</span>), </span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_sep =</span> <span class="st">"_"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"Estadistico"</span>, <span class="at">values_from =</span> <span class="st">"value"</span>)</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>resumen_ambiental <span class="sc">%&gt;%</span> </span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-fig3" class="cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Variable
+</th>
+<th style="text-align:right;">
+Media
+</th>
+<th style="text-align:right;">
+Minimo
+</th>
+<th style="text-align:right;">
+Maximo
+</th>
+<th style="text-align:right;">
+DE
+</th>
+<th style="text-align:right;">
+Varianza
+</th>
+<th style="text-align:right;">
+Rango
+</th>
+<th style="text-align:right;">
+Q1
+</th>
+<th style="text-align:right;">
+Q2
+</th>
+<th style="text-align:right;">
+Q3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+pH
+</td>
+<td style="text-align:right;">
+7.54
+</td>
+<td style="text-align:right;">
+6.50
+</td>
+<td style="text-align:right;">
+8.40
+</td>
+<td style="text-align:right;">
+0.48
+</td>
+<td style="text-align:right;">
+0.23
+</td>
+<td style="text-align:right;">
+1.90
+</td>
+<td style="text-align:right;">
+7.20
+</td>
+<td style="text-align:right;">
+7.60
+</td>
+<td style="text-align:right;">
+7.90
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Water temperature
+</td>
+<td style="text-align:right;">
+26.73
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+39.00
+</td>
+<td style="text-align:right;">
+6.22
+</td>
+<td style="text-align:right;">
+38.69
+</td>
+<td style="text-align:right;">
+39.00
+</td>
+<td style="text-align:right;">
+24.70
+</td>
+<td style="text-align:right;">
+28.00
+</td>
+<td style="text-align:right;">
+29.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Conductivity
+</td>
+<td style="text-align:right;">
+636.20
+</td>
+<td style="text-align:right;">
+231.00
+</td>
+<td style="text-align:right;">
+1655.00
+</td>
+<td style="text-align:right;">
+372.51
+</td>
+<td style="text-align:right;">
+138764.83
+</td>
+<td style="text-align:right;">
+1424.00
+</td>
+<td style="text-align:right;">
+403.17
+</td>
+<td style="text-align:right;">
+492.00
+</td>
+<td style="text-align:right;">
+650.25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Salinity
+</td>
+<td style="text-align:right;">
+3.06
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+26.00
+</td>
+<td style="text-align:right;">
+4.80
+</td>
+<td style="text-align:right;">
+23.04
+</td>
+<td style="text-align:right;">
+26.00
+</td>
+<td style="text-align:right;">
+2.00
+</td>
+<td style="text-align:right;">
+2.00
+</td>
+<td style="text-align:right;">
+2.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Transparency
+</td>
+<td style="text-align:right;">
+78.28
+</td>
+<td style="text-align:right;">
+0.79
+</td>
+<td style="text-align:right;">
+600.00
+</td>
+<td style="text-align:right;">
+91.53
+</td>
+<td style="text-align:right;">
+8377.36
+</td>
+<td style="text-align:right;">
+599.21
+</td>
+<td style="text-align:right;">
+32.50
+</td>
+<td style="text-align:right;">
+64.00
+</td>
+<td style="text-align:right;">
+82.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Oxygen
+</td>
+<td style="text-align:right;">
+6.70
+</td>
+<td style="text-align:right;">
+1.20
+</td>
+<td style="text-align:right;">
+24.90
+</td>
+<td style="text-align:right;">
+4.99
+</td>
+<td style="text-align:right;">
+24.90
+</td>
+<td style="text-align:right;">
+23.70
+</td>
+<td style="text-align:right;">
+3.80
+</td>
+<td style="text-align:right;">
+6.00
+</td>
+<td style="text-align:right;">
+7.51
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Carbon Dioxide
+</td>
+<td style="text-align:right;">
+22.66
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+103.50
+</td>
+<td style="text-align:right;">
+19.50
+</td>
+<td style="text-align:right;">
+380.38
+</td>
+<td style="text-align:right;">
+103.50
+</td>
+<td style="text-align:right;">
+14.25
+</td>
+<td style="text-align:right;">
+20.00
+</td>
+<td style="text-align:right;">
+25.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Alkalinity
+</td>
+<td style="text-align:right;">
+190.74
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+410.00
+</td>
+<td style="text-align:right;">
+73.84
+</td>
+<td style="text-align:right;">
+5452.69
+</td>
+<td style="text-align:right;">
+410.00
+</td>
+<td style="text-align:right;">
+133.00
+</td>
+<td style="text-align:right;">
+182.00
+</td>
+<td style="text-align:right;">
+233.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NO2
+</td>
+<td style="text-align:right;">
+0.02
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.20
+</td>
+<td style="text-align:right;">
+0.04
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.20
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+<td style="text-align:right;">
+0.02
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NO3
+</td>
+<td style="text-align:right;">
+0.50
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+3.65
+</td>
+<td style="text-align:right;">
+0.74
+</td>
+<td style="text-align:right;">
+0.54
+</td>
+<td style="text-align:right;">
+3.65
+</td>
+<td style="text-align:right;">
+0.02
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+0.74
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ammonium
+</td>
+<td style="text-align:right;">
+1.47
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+5.00
+</td>
+<td style="text-align:right;">
+1.53
+</td>
+<td style="text-align:right;">
+2.35
+</td>
+<td style="text-align:right;">
+5.00
+</td>
+<td style="text-align:right;">
+0.35
+</td>
+<td style="text-align:right;">
+1.09
+</td>
+<td style="text-align:right;">
+1.97
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hardness
+</td>
+<td style="text-align:right;">
+287.50
+</td>
+<td style="text-align:right;">
+92.00
+</td>
+<td style="text-align:right;">
+1000.00
+</td>
+<td style="text-align:right;">
+194.41
+</td>
+<td style="text-align:right;">
+37794.39
+</td>
+<td style="text-align:right;">
+908.00
+</td>
+<td style="text-align:right;">
+170.00
+</td>
+<td style="text-align:right;">
+226.00
+</td>
+<td style="text-align:right;">
+350.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Phosphates
+</td>
+<td style="text-align:right;">
+0.21
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.75
+</td>
+<td style="text-align:right;">
+0.19
+</td>
+<td style="text-align:right;">
+0.03
+</td>
+<td style="text-align:right;">
+0.75
+</td>
+<td style="text-align:right;">
+0.06
+</td>
+<td style="text-align:right;">
+0.16
+</td>
+<td style="text-align:right;">
+0.33
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TDS
+</td>
+<td style="text-align:right;">
+353.84
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+998.00
+</td>
+<td style="text-align:right;">
+237.89
+</td>
+<td style="text-align:right;">
+56592.78
+</td>
+<td style="text-align:right;">
+998.00
+</td>
+<td style="text-align:right;">
+182.90
+</td>
+<td style="text-align:right;">
+288.00
+</td>
+<td style="text-align:right;">
+449.50
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3: Resumen estadístico de las variables ambientales en la cuenca del río Soto La Marina, México.
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>biol_abrev <span class="ot">&lt;-</span> largo_biol <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Sitios, Abrev, Abundancia) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Abrev, <span class="at">values_from =</span> Abundancia)  <span class="co">#convertir a formato ancho</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>biol_log <span class="ot">&lt;-</span> largo_biol <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Sitios, Abrev, Abundancia) <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Abrev, <span class="at">values_from =</span> Abundancia)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>columnas_numericas <span class="ot">&lt;-</span> <span class="fu">names</span>(biol_log)[<span class="dv">2</span><span class="sc">:</span><span class="dv">50</span>]</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterar sobre los nombres de las columnas</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (columna <span class="cf">in</span> columnas_numericas) {</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Manejar los NAs: reemplazarlos con 0 antes de la suma condicional</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  biol_log[[columna]][<span class="fu">is.na</span>(biol_log[[columna]])] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Identificar los valores cero y sumar 1 solo a ellos</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  biol_log[[columna]][biol_log[[columna]] <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> biol_log[[columna]][biol_log[[columna]] <span class="sc">==</span> <span class="dv">0</span>] <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Aplicar el logaritmo común (log10) a la columna</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  biol_log[[columna]] <span class="ot">&lt;-</span> <span class="fu">log10</span>(biol_log[[columna]])</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar las primeras filas del data frame transformado</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(biol_log) </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 90
+  Sitios  Hyps  Atrs  Elps  Mgla  Albv  Angr  Myrp  Ancm  Anch  Brvg  Brvp  Drsc
+  &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 17M        0     0     0     0     0     0     0     0     0     0     0     0
+2 1M         0     0     0     0     0     0     0     0     0     0     0     0
+3 28M        0     0     0     0     0     0     0     0     0     0     0     0
+4 29M        0     0     0     0     0     0     0     0     0     0     0     0
+5 30M        0     0     0     0     0     0     0     0     0     0     0     0
+6 36M        0     0     0     0     0     0     0     0     0     0     0     0
+# ℹ 77 more variables: Drsp &lt;dbl&gt;, Hrnj &lt;dbl&gt;, Opso &lt;dbl&gt;, Cmpa &lt;dbl&gt;,
+#   Cypl &lt;dbl&gt;, Cypc &lt;dbl&gt;, Dnde &lt;dbl&gt;, Dsp. &lt;dbl&gt;, Nagñ &lt;dbl&gt;, Mxsc &lt;dbl&gt;,
+#   Astm &lt;dbl&gt;, Arpf &lt;dbl&gt;, Amrm &lt;dbl&gt;, Amrn &lt;dbl&gt;, Ictl &lt;dbl&gt;, Ictp &lt;dbl&gt;,
+#   Isp. &lt;dbl&gt;, Pylo &lt;dbl&gt;, Synf &lt;dbl&gt;, Prcp &lt;dbl&gt;, Djsm &lt;dbl&gt;, Mglc &lt;dbl&gt;,
+#   Mmbm &lt;dbl&gt;, Mndb &lt;dbl&gt;, Hmrb &lt;dbl&gt;, Strt &lt;dbl&gt;, Fndg &lt;dbl&gt;, Lcnp &lt;dbl&gt;,
+#   Gmbsaf &lt;dbl&gt;, Gmbsar &lt;dbl&gt;, Gmbr &lt;dbl&gt;, Gsp. &lt;dbl&gt;, Pclf &lt;dbl&gt;, Pcll &lt;dbl&gt;,
+#   Pclm &lt;dbl&gt;, Psp. &lt;dbl&gt;, Xphv &lt;dbl&gt;, Prnr &lt;dbl&gt;, Cntu &lt;dbl&gt;, Mycb &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="figura-de-elipises-con-las-15-especies-más-abundantes" class="level2">
+<h2 class="anchored" data-anchor-id="figura-de-elipises-con-las-15-especies-más-abundantes">Figura de elipises con las 15 especies más abundantes</h2>
+<p>La <a href="#fig-fig4" class="quarto-xref">Figura&nbsp;4</a> representa las relaciones entre las especies de peces evaluadas. En su mayoría, se observan correlaciones positivas, aunque no altamente significativas. Por ejemplo, las especies <em>Poecilia mexicana</em> con <em>Astyanax mexicanus, Herichthys cyanoguttatus</em> y <em>Poecilia formosa</em> presentan una correlación aproximada del <strong>60%</strong>, lo que indica que van a tender a encontrarse en los mismos sitios. Las relaciones positivas más fuertes se observaron entre <em>Dorosoma cepedianum</em> y<em>Dorosoma petenense</em> así como entre <em>Ariopsis felis</em>y<em>Dorosoma cepedianum</em>, lo que sugiere que estas especies pueden compartir hábitats o responder de manera similar a factores ambientales. Por otro lado, la mayoría de las correlaciones negativas fueron leves, lo que indica que la abundancia de una especie no parece verse fuertemente afectada por la presencia de otra.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Elipses con colores de las 15 especies más abundantes</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>columnas_filbiol2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Pclm"</span>, <span class="st">"Astm"</span>, <span class="st">"Hrcc"</span>, <span class="st">"Gmbr"</span>, <span class="st">"Pclf"</span>, <span class="st">"Nagñ"</span>, <span class="st">"Gmbsaf"</span>,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="st">"Gsp."</span>, <span class="st">"Msp."</span>, <span class="st">"Aplg"</span>, <span class="st">"Drsp"</span>, <span class="st">"Orca"</span>, <span class="st">"Mxsc"</span>, <span class="st">"Drsc"</span>, <span class="st">"Arpf"</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>L2 <span class="ot">&lt;-</span> <span class="fu">cor</span>(biol_log[columnas_filbiol2]) <span class="sc">%&gt;%</span>  </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">15</span>) </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(L2, <span class="at">method =</span> <span class="st">"ellipse"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-fig4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="estudio-de-caso_files/figure-html/fig-fig4-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;4: Relaciones lineales comparando las abundancias de peces entre sí en los diferentes ríos muestreados. Las elipses azules representas relaciones positivas y las rojas representan relaciones negativas.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Abreviaturas de las variables ambientales</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>largo_amb <span class="ot">&lt;-</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  largo_amb <span class="sc">%&gt;%</span> </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Abrev =</span> <span class="fu">abbreviate</span>(Variables, <span class="at">minlength =</span> <span class="dv">4</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+<section id="figura-de-elipses-de-los-datos-ambientales-fisicoquímicos" class="level2">
+<h2 class="anchored" data-anchor-id="figura-de-elipses-de-los-datos-ambientales-fisicoquímicos">Figura de elipses de los datos ambientales fisicoquímicos</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Abreviaturas de las variables ambientales</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>largo_amb <span class="ot">&lt;-</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  largo_amb <span class="sc">%&gt;%</span> </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Abrev =</span> <span class="fu">abbreviate</span>(Variables, <span class="at">minlength =</span> <span class="dv">4</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>La <a href="#fig-fig5" class="quarto-xref">Figura&nbsp;5</a> representa las relaciones entre las variables ambientales evaluadas. Se observa que la relación más fuerte se observó entre las variables <strong>Conductividad</strong> y <strong>Sólidos totales disueltos</strong>, lo que indica que cuando la <strong>Conductividad</strong> aumenta, los <strong>Sólidos</strong> <strong>Totales Disueltos</strong> también lo hacen. También, hay relaciones positivas entre las variables de <strong>Salinidad</strong>-<strong>Conductividad</strong>, <strong>Salinidad</strong>-<strong>Transpariencia</strong>, <strong>Conductividad</strong>-<strong>Transpariencia</strong>, y <strong>Dureza</strong>-<strong>Conductividad</strong>. . Lo que nos indica que estás variables estarán correlacionadas al estar en valores altos o bajos en los sitios. Por otro lado, no se observan relaciones negativas fuertes entre las varibales ambientales.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>amb_abrev <span class="ot">&lt;-</span> largo_amb <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Sitios, Abrev, Valores) <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Abrev, <span class="at">values_from =</span> Valores)  <span class="co">#convertir a formato ancho</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>columnas_filamb <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"pH"</span>, <span class="st">"Cndc"</span>, <span class="st">"Slnt"</span>, <span class="st">"Trns"</span>, <span class="st">"Oxyg"</span>, <span class="st">"CrbD"</span>, <span class="st">"Alkl"</span>, <span class="st">"NO2"</span>, <span class="st">"NO3"</span>, <span class="st">"Ammn"</span>, <span class="st">"Hrdn"</span>, <span class="st">"Phsp"</span>, <span class="st">"TDS"</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>J <span class="ot">&lt;-</span> <span class="fu">cor</span>(amb_abrev[columnas_filamb])</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(J, <span class="at">method =</span> <span class="st">"ellipse"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-fig5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="estudio-de-caso_files/figure-html/fig-fig5-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;5: Relaciones lineales comparando datos ambientales en los diferentes ríos muestreados. Las elipses azules representas relaciones positivas y las rojas representan relaciones negativas.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="figura-de-elipses-de-los-datos-ambientales-y-biológicos-con-las-abundancias-convertidas-a-logaritmo-log10" class="level2">
+<h2 class="anchored" data-anchor-id="figura-de-elipses-de-los-datos-ambientales-y-biológicos-con-las-abundancias-convertidas-a-logaritmo-log10">Figura de elipses de los datos ambientales y biológicos con las abundancias convertidas a logaritmo (<code>log10</code>)</h2>
+<p>La <a href="#fig-fig6" class="quarto-xref">Figura&nbsp;6</a> muestra las relaciones entre las especies de peces y las variables ambientales evaluadas. La mayoria de las abundancias de epecies no tuvieron relaciones fuertes positivas o negativas con las variables ambientales. Sin embargo, algunas variables ambientales tuvieron relaciones positivas leves con las abundancias, como lo son <strong>Alcalinidad</strong> con las abundancias de <em>Gambusia regani</em>, <em>Gambusia</em> sp. y <em>Micropterus</em> sp<em>.</em> Por otro lado, <strong>Conductuvidad</strong> tuvo una relación negativa media con la especie <em>Astyanax mexicanus</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  Unir las bases de datos por "Sitios"</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>datos_combinados <span class="ot">&lt;-</span> amb_abrev <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(biol_log, <span class="at">by =</span> <span class="st">"Sitios"</span>)  <span class="co"># Mantiene solo sitios en común</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Seleccionar variables ambientales y biológicas</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>datos_amb <span class="ot">&lt;-</span> datos_combinados <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">all_of</span>(columnas_filamb))  <span class="co"># Variables ambientales</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>datos_biol <span class="ot">&lt;-</span> datos_combinados <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">all_of</span>(columnas_filbiol2))  <span class="co"># Variables biológicas</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co">#  Calcular la correlación entre las variables ambientales y biológicas</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>Mamb_biol <span class="ot">&lt;-</span> <span class="fu">cor</span>(datos_amb, datos_biol, <span class="at">use =</span> <span class="st">"pairwise.complete.obs"</span>)  <span class="co"># Pariwise.complete.obs sirve para ignorar los valores faltantes solo en las comparaciones que ocurren</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="co"># matriz de elipses</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(Mamb_biol, <span class="at">method =</span> <span class="st">"ellipse"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-fig6" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="estudio-de-caso_files/figure-html/fig-fig6-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;6: Relaciones lineales comparando datos ambientales vs biologicos en los diferentes ríos muestreados. Las elipses azules representas relaciones positivas y las rojas representan relaciones negativas.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="nueva-columna-con-los-ríos-a-los-que-pertenece-cada-sitio-muestreado" class="level2">
+<h2 class="anchored" data-anchor-id="nueva-columna-con-los-ríos-a-los-que-pertenece-cada-sitio-muestreado">Nueva columna con los ríos a los que pertenece cada sitio muestreado</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>biol_amb<span class="sc">$</span>Sitios <span class="ot">=</span> <span class="fu">as.factor</span>(biol_amb<span class="sc">$</span>Sitios)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>biol_amb <span class="ot">&lt;-</span> biol_amb <span class="sc">%&gt;%</span> </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Rios =</span> <span class="fu">case_when</span>(</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    Sitios <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"1M"</span>, <span class="st">"2M"</span>, <span class="st">"3P"</span>) <span class="sc">~</span> <span class="st">"Arroyo Grande"</span>,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    Sitios <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"4M"</span>, <span class="st">"5M"</span>, <span class="st">"6P"</span>, <span class="st">"7P"</span>, <span class="st">"8M"</span>) <span class="sc">~</span> <span class="st">"Corona"</span>,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    Sitios <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"9P"</span>, <span class="st">"10P"</span>) <span class="sc">~</span> <span class="st">"Palmas"</span>,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    Sitios <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"11M"</span>, <span class="st">"12M"</span>, <span class="st">"13M"</span>, <span class="st">"14M"</span>, <span class="st">"15P"</span>, <span class="st">"16P"</span>) <span class="sc">~</span> <span class="st">"Pilón"</span>,</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    Sitios <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"17M"</span>, <span class="st">"18M"</span>, <span class="st">"19P"</span>, <span class="st">"20M"</span>, <span class="st">"21P"</span>, <span class="st">"22P"</span>, <span class="st">"23P"</span>) <span class="sc">~</span> <span class="st">"Purificación"</span>,</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    Sitios <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"25M"</span>, <span class="st">"26M"</span>, <span class="st">"27P"</span>) <span class="sc">~</span> <span class="st">"San Carlos"</span>,</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    Sitios <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"28M"</span>, <span class="st">"29M"</span>, <span class="st">"30M"</span>, <span class="st">"31M"</span>, <span class="st">"32M"</span>) <span class="sc">~</span> <span class="st">"San Felipe"</span>,</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    Sitios <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"33M"</span>, <span class="st">"34M"</span>, <span class="st">"35M"</span>) <span class="sc">~</span> <span class="st">"San Marcos"</span>,</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    Sitios <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"36M"</span>, <span class="st">"37P"</span>, <span class="st">"38M"</span>) <span class="sc">~</span> <span class="st">"Santa Ana"</span>,</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    Sitios <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"39P"</span>, <span class="st">"40P"</span>, <span class="st">"41P"</span>, <span class="st">"42RM"</span>, <span class="st">"43RM"</span>) <span class="sc">~</span> <span class="st">"Soto la Marina"</span>,</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Otro"</span> </span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  ))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+<section id="relacion-entre-la-abundancia-y-el-ph" class="level2">
+<h2 class="anchored" data-anchor-id="relacion-entre-la-abundancia-y-el-ph">Relacion entre la abundancia y el pH</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertir la variable pH a categórica</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>biol_amb <span class="ot">&lt;-</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  biol_amb <span class="sc">%&gt;%</span> </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pH_level =</span> <span class="fu">case_when</span>(</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    pH <span class="sc">&lt;=</span> <span class="fu">quantile</span>(pH, <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>) <span class="sc">~</span> <span class="st">"Bajo"</span>,</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    pH <span class="sc">&lt;=</span> <span class="fu">quantile</span>(pH, <span class="dv">2</span><span class="sc">/</span><span class="dv">3</span>) <span class="sc">~</span> <span class="st">"Medio"</span>,</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    pH <span class="sc">&lt;=</span> <span class="fu">quantile</span>(pH, <span class="dv">3</span><span class="sc">/</span><span class="dv">3</span>) <span class="sc">~</span> <span class="st">"Alto"</span>,</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  ))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>La <a href="#fig-fig7" class="quarto-xref">Figura&nbsp;7</a> muestra la distribución de las abundancias de peces en los diferentes ríos muestreados según el nivel de pH, categorizado en tres diferentes niveles: Bajo (morado), Medio (naranja) y Alto (rojo). Se observa que la abundancia varía considerablemente entre los ríos y los niveles de pH; en algunos ríos como <strong>San Felipe</strong> y <strong>San Marcos</strong>,la abundancia es mayor en condiciones de pH alto, mientras que en otros como <strong>Pilón</strong> y <strong>Purificación</strong>, los valores son más dispersos.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Gráfica de la relacion entre la abundancia y el pH</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(biol_amb, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Rios), <span class="at">y =</span> Abundancia, <span class="at">fill =</span> pH_level)) <span class="sc">+</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span>  </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución de la Abundancia según Nivel de pH"</span>,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Ríos muestreados"</span>,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Abundancia en escala log10"</span>,</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Nivel de pH"</span>) <span class="sc">+</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">14</span>),  <span class="co"># Centrar el título</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust =</span> <span class="dv">1</span>)  <span class="co"># Rotar nombres de ríos en 45°</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Bajo"</span> <span class="ot">=</span> <span class="st">"blue"</span>, <span class="st">"Medio"</span> <span class="ot">=</span> <span class="st">"orange"</span>, <span class="st">"Alto"</span> <span class="ot">=</span> <span class="st">"red"</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-fig7" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="estudio-de-caso_files/figure-html/fig-fig7-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;7: Grafico de cajas comparando las abundancias en distintos niveles de pH en los Ríos.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="relacion-entre-la-abundancia-y-la-alcalinidad" class="level2">
+<h2 class="anchored" data-anchor-id="relacion-entre-la-abundancia-y-la-alcalinidad">Relacion entre la abundancia y la Alcalinidad</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertir la variable Alcalinidad a categórica</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>biol_amb <span class="ot">&lt;-</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  biol_amb <span class="sc">%&gt;%</span> </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Alkalinity_level =</span> <span class="fu">case_when</span>(</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    Alkalinity <span class="sc">&lt;=</span> <span class="fu">quantile</span>(Alkalinity, <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>) <span class="sc">~</span> <span class="st">"Bajo"</span>,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    Alkalinity <span class="sc">&lt;=</span> <span class="fu">quantile</span>(Alkalinity, <span class="dv">2</span><span class="sc">/</span><span class="dv">3</span>) <span class="sc">~</span> <span class="st">"Medio"</span>,</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    Alkalinity <span class="sc">&lt;=</span> <span class="fu">quantile</span>(Alkalinity, <span class="dv">3</span><span class="sc">/</span><span class="dv">3</span>) <span class="sc">~</span> <span class="st">"Alto"</span>,</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  ))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>La <a href="#fig-fig8" class="quarto-xref">Figura&nbsp;8</a> muestra la distribución de las abundancias de peces en los diferentes ríos muestreados según el nivel de Alcalinidad, categorizado en tres diferentes niveles: Bajo (amarillo claro), Medio (amarillo oscuro) y Alto (naranja). Se observa que la abundancia varía entre ríos y niveles de Alcalinidad. En <strong>San Marcos</strong> y <strong>Santa Ana</strong>, la abundancia parece ser mayor en condiciones de alta alcalinidad. Por el contrario, en sitios como <strong>Purificación</strong> y <strong>San Carlos</strong>, los valores están más distribuidos entre los diferentes niveles de alcalinidad</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear gráfico con etiquetas de valores atípicos redondeados</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(biol_amb, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Rios), <span class="at">y =</span> Abundancia, <span class="at">fill =</span> Alkalinity_level)) <span class="sc">+</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span>  </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>()<span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución de la Abundancia según el Nivel de alcalinidad"</span>,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Nivel de alcalinidad"</span>,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Abundancia en escala log10"</span>,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Nivel de alcalinidad"</span>) <span class="sc">+</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">14</span>),  <span class="co">#Centrar el título</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust =</span> <span class="dv">1</span>)  <span class="co"># Rotar nombres de ríos en 45°</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Bajo"</span> <span class="ot">=</span> <span class="st">"#ffeda0"</span>, <span class="st">"Medio"</span> <span class="ot">=</span> <span class="st">"#feb24c"</span>, <span class="st">"Alto"</span> <span class="ot">=</span> <span class="st">"#f03b20"</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-fig8" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="estudio-de-caso_files/figure-html/fig-fig8-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;8: Grafico de cajas comparando las abundancias en distintos niveles de Alcalinidad en los Ríos.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="regresión-lineal-entre-la-abundancia-y-la-alcalinidad" class="level2">
+<h2 class="anchored" data-anchor-id="regresión-lineal-entre-la-abundancia-y-la-alcalinidad">Regresión lineal entre la abundancia y la Alcalinidad</h2>
+<p>En la <a href="#fig-fig9" class="quarto-xref">Figura&nbsp;9</a> muestra una regresión lineal entre la abundancia y la alcalinidad. Se puede observar un comportamiento lineal positivo de las abundancias respecto a la alcalinidad, donde a medida que va en aumento los valores de <strong>Alcalinidad</strong>, a su vez lo hara las abundancias de peces. Sin embargo, es importante mencionar que los datos muestran un comportamiento disperso respecto a la linea de tendencia, esto quiere decir que la alcalinidad no es la unica variable que le da forma a las abundancias , debido a que la suma de otras variables ambientales pueden estar dando forma a como se distribuyen las abundancias de peces en los sitios.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Figuras de regresión entre la abundancia y la Alcalinidad</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(biol_amb, <span class="fu">aes</span>(<span class="at">x =</span> Alkalinity, <span class="at">y =</span> Abundancia) )<span class="sc">+</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> Rios), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span> <span class="st">"lm"</span>) <span class="sc">+</span> </span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución de la Abundancia según Nivel de Alcalinidad"</span>,</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Nivel de alcalinidad"</span>,</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Abundancia en escala log10"</span>)<span class="sc">+</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-fig9" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="estudio-de-caso_files/figure-html/fig-fig9-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;9: Grafico de regresiones lineales comparando las abundancias en distintos niveles de alcalinidad en los Ríos.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="regresión-suavizada-entre-la-abundancia-y-la-alcalinidad" class="level2">
+<h2 class="anchored" data-anchor-id="regresión-suavizada-entre-la-abundancia-y-la-alcalinidad">Regresión suavizada entre la abundancia y la Alcalinidad</h2>
+<p>En la <a href="#fig-fig10" class="quarto-xref">Figura&nbsp;10</a> muestra una regresión suavizada entre la abundancia y la alcalinidad. Se observa una relación de tipo no lineal, que al ser suavizada se ajusta en mejor medida a los datos dispersos, con una mayor abundancia en niveles bajos y altos de alcalinidad, pero menor en niveles intermedios. La abundancia es alta y dispersa en alcalinidad baja (0-50) y disminuye en valores medios (~50-150) y vuelve a aumentar con variabilidad en niveles más altos (~150-400).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Figuras de regresión entre la abundancia y la Alcalinidad</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(biol_amb, <span class="fu">aes</span>(<span class="at">x =</span> Alkalinity, <span class="at">y =</span> Abundancia) )<span class="sc">+</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> Rios), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">span =</span> <span class="fl">0.4</span>) <span class="sc">+</span> </span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución de la Abundancia según Nivel de Alcalinidad"</span>,</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Nivel de alcalinidad"</span>,</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Abundancia en escala log10"</span>)<span class="sc">+</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-fig10" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="estudio-de-caso_files/figure-html/fig-fig10-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;10: Grafico de regresiones suavizadas comparando las abundancias en distintos niveles de alcalinidad en los Ríos.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="regresión-lineal-entre-la-abundancia-y-el-ph" class="level2">
+<h2 class="anchored" data-anchor-id="regresión-lineal-entre-la-abundancia-y-el-ph">Regresión lineal entre la abundancia y el pH</h2>
+<p>La <a href="#fig-fig11" class="quarto-xref">Figura&nbsp;11</a> muestra una regresión lineal entre la abundancia y el pH. Se observa un leve comportamiento positvo, sin embargo, esta no es lo suficientemente fuerte. Además, se observa una alta dispersión de los datos, lo que nos indica que el <strong>pH</strong> por si mismo no le dará forma a la distribución de las abundancias, si no que puede que la suma de otras variables ambientales lo van a determinar. Se puede observar también una alta variabilidad en ciertos rangos, lo que sugiere que otros factores pueden estar influyendo en la relación.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Regresion lineal entre la abundancia y el pH</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(biol_amb, <span class="fu">aes</span>(<span class="at">x=</span> pH, <span class="at">y=</span> Abundancia)  ) <span class="sc">+</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> Rios), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span> <span class="st">"lm"</span>)<span class="sc">+</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Relación de la Abundancia según Nivel de pH"</span>,</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Nivel de pH"</span>,</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Abundancia en escala log10"</span>)<span class="sc">+</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-fig11" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="estudio-de-caso_files/figure-html/fig-fig11-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;11: Grafico de regresiones lineales comparando las abundancias en distintos niveles de pH en los Ríos.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="regresión-suavizada-entre-la-abundancia-y-el-ph" class="level2">
+<h2 class="anchored" data-anchor-id="regresión-suavizada-entre-la-abundancia-y-el-ph">Regresión suavizada entre la abundancia y el pH</h2>
+<p>La <a href="#fig-fig12" class="quarto-xref">Figura&nbsp;12</a> muestra la variación de la abundancia de organismo (en escala logarítmica) en función del <strong>pH</strong> del agua en los diferentes ríos muestreados. La curva de regresión suavizada sugiere que la abundancia es menor en valores cercanos a 6.5, aunmenta gradualmente al rededor de 7.5 y luego presenta variaciones a medida que el pH se acerca a 8. La variabilidad es alta en valores extremos de pH, lo que sugiere que otros factores pueden estar influyendo en la abundancia.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Regresion lineal entre la abundancia y el pH</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(biol_amb, <span class="fu">aes</span>(<span class="at">x=</span> pH, <span class="at">y=</span> Abundancia)  ) <span class="sc">+</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> Rios), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">span =</span> <span class="fl">0.4</span>)<span class="sc">+</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Relación de la Abundancia según Nivel de pH"</span>,</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Nivel de pH"</span>,</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Abundancia en escala log10"</span>)<span class="sc">+</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-fig12" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="estudio-de-caso_files/figure-html/fig-fig12-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;12: Grafico de regresiones suavizadas comparando las abundancias en distintos niveles de pH en los Ríos.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="grafico-de-burbujas" class="level2">
+<h2 class="anchored" data-anchor-id="grafico-de-burbujas">Grafico de burbujas</h2>
+<p>En la <a href="#fig-fig13" class="quarto-xref">Figura&nbsp;13</a> se puede observar que las abundancias estuvieron entre el nivel de pH 6.5 y 8.4, donde fuera de este rango no se registraron muchos individuos. La especie que mayores abundancias regitraron fueron: Gmbr con 1500 individuos en un nivel de 7.4 y Pcml con 1500 individuos a un nivel de 8. El río Arroyo Grande tuvo restringidas sus abundancias en el nivel de pH 6.7. Las abundancias de especies como Pclf, Hrcc y Astm se distribuyeron uniformemente entre los valores de pH 6.5 y 8.4 con menos de 500 individuos por sitio.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Abreviar nombres de los grupos taxonómicos</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>biol_amb <span class="ot">&lt;-</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  biol_amb <span class="sc">%&gt;%</span> </span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Abrev =</span> <span class="fu">abbreviate</span>(Especie, <span class="at">minlength =</span> <span class="dv">4</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Abundancia<span class="sc">&gt;</span><span class="dv">10</span>)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Crear el gráfico de burbujas</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(biol_amb, <span class="fu">aes</span>(<span class="at">x =</span> pH, <span class="at">y =</span> Abrev, <span class="at">size =</span> Abundancia, <span class="at">color =</span> Rios)) <span class="sc">+</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span>  <span class="co"># Transparencia para mejor visualización</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">8</span>)) <span class="sc">+</span> </span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">9</span>), </span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">6</span>, <span class="dv">9</span>, <span class="at">by =</span> <span class="fl">0.5</span>)) <span class="sc">+</span> </span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">"bold"</span>),  <span class="co"># Título del eje X más visible</span></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Líneas verticales grises</span></span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">seq</span>(<span class="dv">6</span>, <span class="dv">9</span>, <span class="at">by =</span> <span class="dv">1</span>), <span class="at">color =</span> <span class="st">"gray"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span> </span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Circulos de la abundancia en la leyenda</span></span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(</span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="cn">NULL</span>, </span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a>                        <span class="at">override.aes =</span> <span class="fu">list</span>(<span class="at">shape =</span> <span class="dv">1</span>, </span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">color =</span> <span class="st">"#377eb8"</span>,</span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">stroke =</span> <span class="fl">1.2</span>)),  </span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Circulos de las Layers en la leyenda</span></span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a><span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="cn">NULL</span>)   <span class="co">#  Eliminar el título de la leyenda para "group"</span></span>
+<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-fig13" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig13-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="estudio-de-caso_files/figure-html/fig-fig13-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig13-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;13: Grafico de burbujas comparando las abundancias con el nivel de pH en los diferentes Ríos.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="referencias-bibliográficas" class="level2">
+<h2 class="anchored" data-anchor-id="referencias-bibliográficas">Referencias bibliográficas</h2>
+<ol type="1">
+<li>De Catalunya, U. O., Ventura, C., &amp; Fernando, C. B. (2018). <em>Empleo de modelos estadísticos multivariantes para el análisis de comportamiento de comunidades ecológicas</em>. <a href="http://hdl.handle.net/10609/72629" class="uri">http://hdl.handle.net/10609/72629</a></li>
+<li>González, A.R. (2017). Ecología aplicada: diseño y análisis estadístico.</li>
+<li>Ospina, J.S., López-Delgado, E.O., &amp; Villa-Navarro, F.A. (2023). Estructura y diversidad de las comunidades ícticas a lo largo de un gradiente longitudinal en ríos costeros de la Sierra Nevada de Santa Marta.&nbsp;<em>Revista de la Academia Colombiana de Ciencias Exactas, Físicas y Naturales</em>.</li>
+<li>Torrruco, D., González, A., &amp; González, Á. T. (2017). Diversidad y distribución de peces y su relación con variables ambientales, en el sur del Golfo de México.&nbsp;<em>Revista de Biología Tropical</em>,&nbsp;<em>66</em>(1), 438.&nbsp;https://doi.org/10.15517/rbt.v66i1.26255</li>
+</ol>
+<hr>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

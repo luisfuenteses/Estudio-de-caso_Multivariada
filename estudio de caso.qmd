@@ -1,0 +1,611 @@
+---
+title: "Estudio de caso: Diversity and longitudinal distribution of fishes in the Soto La Marina River basin, Mexico, and relationship 
+with environmental variables"
+subtitle: "Estudio de caso para la aplicación de estadíastica multivariada"
+date: last-modified #now #today
+description: Se realizarán algunos ejercicios con el objetivo de fortalecer destrezas en manejo y análisis de bases de datos.
+author: 
+  name: Fuentes-Sáenz, Luis - Uribe-Lache, Julian - Sánchez-Charris, Vanessa
+  url: https://www.unimagdalena.edu.co/
+  afiliation: 
+  afiliation-url: 
+title-block-banner: "#2ca25f"
+format:
+  html:
+    toc: true    # Tabla de contenido
+    toc-depth: 6 
+    toc-title: Menú flotante
+    code-tools: false   # Opción para descargar los códigos
+    code-fold: false   # Visualización de los códigos en el reporte
+    css: ["styles2.css"]    # Colores del texto.
+lang: ES-es
+---
+
+------------------------------------------------------------------------
+
+![](foto%20artículo.png){fig-align="left"}
+
+DOI: <https://doi.org/10.1007/s10641-021-01158-9>
+
+------------------------------------------------------------------------
+
+## Contexto de la base de datos
+
+Las bases de datos están compuestas por dos archivos de Excel que contienen datos biológicos y ambientales. En la base de datos biológicos, se encuentran columnas de 90 especies y en las filas las localidades, estas están identificadas con las iniciales M (montaña), P (llanura) y RM (desembocadura de río), indicando la altitud de cada sitio, y están numeradas del 1 al 43. La base de datos ambientales esta constituida por 23 variables ambientales de las cuales 7 variables son cuantitativas y 16 cualitativas. Además, se midieron 9 parámetros de calidad de agua en cada sitio.
+
+------------------------------------------------------------------------
+
+## Introducción
+
+La comprensión de los patrones de diversidad y distribución de las comunidades acuáticas es fundamental al abordar los sistemas fluviales, porque son determinantes para la ecología acuática contemporánea. Estos patrones han reflejado la interacción entre factores bióticos y abióticos, así como han servido como indicadores de la salud ecosistémica de integridad hidrológica (Ospina et al., 2023). Los peces son uno de los grupos más diversos y ecológicamente significativos de la fauna que habita el ecosistema. La variación longitudinal crea, de hecho, gradientes ambientales que modelan la estructura de las comunidades de peces, tanto en los sistemas neotropicales como en los templados (Ospina et al., 2023; Torruco et al., 2017). Sin embargo, la incertidumbre de los controladores de estos sistemas con relación a la dimensionalidad de las variables ambientales y biológicas sólo puede abordarse a partir de un análisis capaz de juntar disímiles informaciones en patrones ecológicos significativos. Es por esta razón que se emplea la estadística multivariada.
+
+Como buena parte de la ciencia moderna, la ecología ha evolucionado de enfoques más sencillos hacia el uso de modelos estadísticos multivariantes. En este caso, la multi-variedad proporciona a los ecólogos la posibilidad de responder a preguntas complejas sobre la estratificación de la comunidad (De Catalunya et al., 2018). La evolución posterior, en el contexto del software estadístico en general y del lenguaje R en particular, ha permitido que un número cada vez mayor de ecólogos formule y analice hipótesis complejas y multivariantes dentro de flujos de trabajo reproducibles y personalizados (González, 2017).\
+El presente estudio analiza la diversidad y la distribución longitudinal de comunidades de peces en un sistema fluvial a partir de la interpretación de datos de una investigación precedente usando técnicas estadísticas multivariadas. Asimismo, el objetivo es investigar los patrones espaciales de distribución y diversidad de peces y tratar de explicar qué variables ambientales son responsables de la composición de especies en la ictiofauna a lo largo del sistema fluvial de la mejor manera posible.
+
+La investigación también intenta delimitar áreas o segmentos que probablemente tengan algunas características distinguibles desde el punto de vista de la estructura de la comunidad de peces y probar la efectividad de diferentes análisis multivariados en la descripción de patrones ecológicos en los ensamblajes de peces. Esto finalmente para producir un modelo conceptual de distribución de peces en relación con los gradientes ambientales que ayude en la gestión y conservación de los ecosistemas acuáticos.
+
+------------------------------------------------------------------------
+
+## Objetivos
+
+### Objetivo General:
+
+Analizar la diversidad y distribución longitudinal de las comunidades de peces en un sistema fluvial mediante el uso de técnicas estadísticas multivariadas y modelos espaciales de predicción, con el fin de identificar patrones ecológicos y su relación con gradientes ambientales.
+
+### Objetivos Específicos:
+
+1.  Identificar las variables ambientales que mejor explican la composición de especies de peces en los distintos segmentos del sistema fluvial.
+
+2.  Evaluar la efectividad de distintos métodos de análisis multivariado en la detección de patrones espaciales de distribución y ensamblajes ícticos en el sistema fluvial estudiado.
+
+------------------------------------------------------------------------
+
+## Diagrama de flujo
+
+![](Diagrama%20de%20flujo.jpg){fig-align="center"}
+
+------------------------------------------------------------------------
+
+## Librerías requeridas
+
+```{r, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(dplyr)
+library(kableExtra)   # Para la edición de tablas
+library(readxl)       # Cargar bases de Excel
+require(stats)        # No se requiere instalar
+library(lattice)      # No se requiere instalar
+library(ggrepel)      # insertar rótulos a los puntos
+require(SciViews)     # Fig. dispersión con coef. de pearson
+library(plotrix)      # Figuras de cajas con múltiples variables
+library(corrplot)     # Figuras de elipses
+library(psych)        # Matrices de correlación para figuras de elipses
+library(reshape)      # Figuras de cajas con múltiples variables
+library(reshape2)     # Figuras de cajas con múltiples variables 
+library(gridExtra)    # Para figuras estadísticas (varios factores)
+library(grid)         # Para figuras estadísticas (varios factores)
+library(ggplot2)      # Paquete gráfico
+library(forcats)      # Para manipulación de factores
+library(viridis)      # Opciones de paletas de colores
+```
+
+------------------------------------------------------------------------
+
+## Base de datos
+
+```{r, warning=FALSE, message=FALSE}
+# Leer la base de datos
+biol <- read_excel("peces marinos méxico_biológicos.xlsx", col_names = TRUE)
+
+amb <- read_excel("peces marinos méxico_ambientales.xlsx", col_names = TRUE)
+```
+
+```{r, warning=FALSE, message=FALSE}
+# Convertir de formato largo a ancho los datos biológicos
+largo_biol <- biol %>%
+  pivot_longer(cols = 2:90,  # Seleccionamos las columnas de especies
+               names_to = "Especie",  # Nueva columna con los nombres de las especies
+               values_to = "Abundancia")  # Nueva columna con los valores de abundancia
+```
+
+```{r, warning=FALSE, message=FALSE}
+# Convertir de formato largo a ancho los datos ambientales
+largo_amb <- amb %>%
+  pivot_longer(cols = 2:38,  # Seleccionamos las columnas de especies
+               names_to = "Variables",  # Nueva columna con los nombres de las especies
+               values_to = "Valores")
+```
+
+------------------------------------------------------------------------
+
+## Abundancia por sitios
+
+```{r message=FALSE, warning=FALSE}
+largo_biol <- largo_biol %>%
+  group_by(Sitios) %>%
+  mutate(Abundancia_Total_Sitio = sum(Abundancia, na.rm = TRUE)) %>%
+  ungroup()
+
+# Resumen de la base de datos original (seis primeras filas)
+head(largo_biol) 
+```
+
+```{r, warning=FALSE, message=FALSE}
+# Generar una nueva columna con valores abreviados en biol
+largo_biol <-
+  largo_biol %>% 
+  mutate(Abrev = abbreviate(Especie, minlength = 4))
+```
+
+```{r message=FALSE, warning=FALSE}
+# Unir bases de datos
+biol_amb <-
+  amb %>% 
+  left_join(largo_biol, by= "Sitios")
+```
+
+------------------------------------------------------------------------
+
+## Taxones más abundantes
+
+La @fig-fig1 muestra las 30 especies más abundantes en los diferentes ríos muestreados. Se observa que la especie *Poecilia mexicana* es la más abundante con un total de 5.573 registros, seguida de la especie *Astyanax mexicanus* con 4.105 registros, indicando que son especies muy comunes en los sitios de estudio.
+
+```{r, warning=FALSE, message=FALSE}
+#| label: fig-fig1
+#| fig-cap: Abundancia de Especies de Peces (30 más abundantes) en la cuenca del río Soto La Marina, México.
+
+# Seleccionar los 15 taxones más abundantes
+  Abundantes <- largo_biol %>%
+  group_by(Especie, Abrev) %>%  # Agrupar por especie y abreviatura
+  summarise(Abundancia_Total = sum(Abundancia, na.rm = TRUE), .groups = "drop") %>%  # Eliminar el agrupamiento
+  arrange(desc(Abundancia_Total)) %>%  # Ordenar de mayor a menor
+  slice_head(n = 30)  # Seleccionar los 15 taxones más abundantes
+
+# Visualizar tabla
+Abundantes %>% 
+  kbl() %>% 
+  kable_classic()
+```
+
+------------------------------------------------------------------------
+
+## Resumen estadístico de la base de datos biológica
+
+La @fig-fig2 muestra un resumen estadístico de los datos biológicos en el sitio de estudio. Se puede observar que el sitio **35M** destaca con la mayor abundancia media (**\~24**) y el valor máximo más alto (**1543**), por el contrario, el sitio **1M** tiene la menor abundancia media (**0.14**) y el máximo más bajo (**10**). La desviación estándar (SD) refleja la variabilidad en la abundancia dentro de cada sitio. Sitios como **35M** y **26M** muestran una alta variabilidad (SD de **167.5** y **150.5**, respectivamente), Por otro lado, sitios como **1M** y **9P** tienen una variabilidad baja (SD de **1.10** y **1.77**).
+
+```{r, warning=FALSE, message=FALSE}
+#| label: fig-fig2
+#| fig-cap: Resumen estadístico de la abundancia de peces en la cuenca del río Soto La Marina, México.
+
+# Resumen estadístico de la base biológica
+resumen_biologico <- largo_biol %>%
+  group_by(Sitios) %>%  # Agrupar por sitio
+  summarise(
+    Abundancia_Media = mean(Abundancia, na.rm = TRUE),
+    Abundancia_Min = min(Abundancia, na.rm = TRUE),
+    Abundancia_Max = max(Abundancia, na.rm = TRUE),
+    Abundancia_SD = sd(Abundancia, na.rm = TRUE),
+    .groups = "drop"  # Evita mensajes sobre agrupación
+  )
+resumen_biologico %>% 
+  kbl() %>% 
+  kable_classic()
+```
+
+------------------------------------------------------------------------
+
+## Resumen estadístico de la base de datos ambiental
+
+En la @fig-fig3 muestra un resumen estadístico de los datos ambientales en el sitio de estudio. Se observa que el pH muestra una media de **7.54**, con valores que oscilan entre **6.5** y **8.4**, lo que indica un ambiente predominantemente neutro a ligeramente alcalino. La temperatura del agua tiene una media de **26.73°C**. La conductividad, con una media de **636.20 µS/cm** y un máximo de **1655 µS/cm**, refleja diferencias en la concentración de iones disueltos, posiblemente relacionadas con la presencia de sales u otros compuestos. El oxígeno disuelto, con una media de **6.7 mg/L**, muestra una amplia variabilidad (desde **1.2 mg/L** hasta **24.9 mg/L**), lo que podría indicar diferencias en la calidad del agua y la actividad fotosintética. Los nutrientes como nitritos (NO₂), nitratos (NO₃) y amonio (NH₄⁺) presentan concentraciones bajas en general, con medias de **0.02 mg/L**, **0.5 mg/L** y **1.47 mg/L**, respectivamente, lo que sugiere una limitada contaminación por compuestos nitrogenados. Los fosfatos, con una media de **0.21 mg/L**, también indican bajos niveles de contaminación por fósforo. En cuanto a la varianza, la conductividad presentó los valores más altos (**138764.83 µS/cm**).
+
+```{r, warning=FALSE, message=FALSE}
+#| label: fig-fig3
+#| fig-cap: Resumen estadístico de las variables ambientales en la cuenca del río Soto La Marina, México.
+
+# Selecciona solo las variables ambientales de interés
+variables_seleccionadas <- amb %>%
+  select(`pH`, `Water temperature`, `Conductivity`, 
+         `Salinity`, `Transparency`, `Oxygen`, 
+         `Carbon Dioxide`, `Alkalinity`, `NO2`, 
+         `NO3`, `Ammonium`, `Hardness`, 
+         `Phosphates`, `TDS`)
+
+# Resumen estadístico de las variables seleccionadas
+resumen_ambiental <- variables_seleccionadas %>%
+  summarise(across(everything(), 
+                   list(Media = ~ round (mean(., na.rm = TRUE), 2),
+                        Minimo = ~ round (min(., na.rm = TRUE), 2),
+                        Maximo = ~ round (max(., na.rm = TRUE), 2),
+                        DE = ~ round (sd(., na.rm = TRUE), 2),
+                        Varianza = ~ round (var(., na.rm = TRUE), 2),
+                        Rango = ~ round (max(., na.rm = TRUE) - min(., na.rm = TRUE), 2),
+                        Q1 = ~ round (quantile(., probs = 0.25, na.rm = TRUE), 2),
+                        Q2 = ~ round (quantile(., probs = 0.50, na.rm = TRUE), 2),
+                        Q3 = ~ round (quantile(., probs = 0.75, na.rm = TRUE), 2)))) %>%
+  pivot_longer(cols = everything(), 
+               names_to = c("Variable", "Estadistico"), 
+               names_sep = "_") %>%
+  pivot_wider(names_from = "Estadistico", values_from = "value")
+
+resumen_ambiental %>% 
+  kbl() %>% 
+  kable_classic()
+```
+
+```{r, warning=FALSE, message=FALSE}
+biol_abrev <- largo_biol %>%
+  select(Sitios, Abrev, Abundancia) %>%
+  pivot_wider(names_from = Abrev, values_from = Abundancia)  #convertir a formato ancho
+```
+
+```{r}
+biol_log <- largo_biol %>%
+  select(Sitios, Abrev, Abundancia) %>%
+  pivot_wider(names_from = Abrev, values_from = Abundancia)
+
+columnas_numericas <- names(biol_log)[2:50]
+
+# Iterar sobre los nombres de las columnas
+for (columna in columnas_numericas) {
+  # Manejar los NAs: reemplazarlos con 0 antes de la suma condicional
+  biol_log[[columna]][is.na(biol_log[[columna]])] <- 0
+
+  # Identificar los valores cero y sumar 1 solo a ellos
+  biol_log[[columna]][biol_log[[columna]] == 0] <- biol_log[[columna]][biol_log[[columna]] == 0] + 1
+
+  # Aplicar el logaritmo común (log10) a la columna
+  biol_log[[columna]] <- log10(biol_log[[columna]])
+}
+
+# Mostrar las primeras filas del data frame transformado
+head(biol_log) 
+```
+
+------------------------------------------------------------------------
+
+## Figura de elipises con las 15 especies más abundantes
+
+La @fig-fig4 representa las relaciones entre las especies de peces evaluadas. En su mayoría, se observan correlaciones positivas, aunque no altamente significativas. Por ejemplo, las especies *Poecilia mexicana* con *Astyanax mexicanus, Herichthys cyanoguttatus* y *Poecilia formosa* presentan una correlación aproximada del **60%**, lo que indica que van a tender a encontrarse en los mismos sitios. Las relaciones positivas más fuertes se observaron entre *Dorosoma cepedianum* y*Dorosoma petenense* así como entre *Ariopsis felis*y*Dorosoma cepedianum*, lo que sugiere que estas especies pueden compartir hábitats o responder de manera similar a factores ambientales. Por otro lado, la mayoría de las correlaciones negativas fueron leves, lo que indica que la abundancia de una especie no parece verse fuertemente afectada por la presencia de otra.
+
+```{r, warning=FALSE, message=FALSE}
+#| label: fig-fig4
+#| fig-cap: Relaciones lineales comparando las abundancias de peces entre sí en los diferentes ríos muestreados. Las elipses azules representas relaciones positivas y las rojas representan relaciones negativas.
+
+# Elipses con colores de las 15 especies más abundantes
+columnas_filbiol2 <- c("Pclm", "Astm", "Hrcc", "Gmbr", "Pclf", "Nagñ", "Gmbsaf",
+"Gsp.", "Msp.", "Aplg", "Drsp", "Orca", "Mxsc", "Drsc", "Arpf")
+L2 <- cor(biol_log[columnas_filbiol2]) %>%  
+  head(n = 15) 
+
+corrplot(L2, method = "ellipse")
+```
+
+```{r, warning=FALSE, message=FALSE}
+#Abreviaturas de las variables ambientales
+largo_amb <-
+  largo_amb %>% 
+  mutate(Abrev = abbreviate(Variables, minlength = 4))
+```
+
+------------------------------------------------------------------------
+
+## Figura de elipses de los datos ambientales fisicoquímicos
+
+```{r, warning=FALSE, message=FALSE}
+#Abreviaturas de las variables ambientales
+largo_amb <-
+  largo_amb %>% 
+  mutate(Abrev = abbreviate(Variables, minlength = 4))
+```
+
+La @fig-fig5 representa las relaciones entre las variables ambientales evaluadas. Se observa que la relación más fuerte se observó entre las variables **Conductividad** y **Sólidos totales disueltos**, lo que indica que cuando la **Conductividad** aumenta, los **Sólidos** **Totales Disueltos** también lo hacen. También, hay relaciones positivas entre las variables de **Salinidad**-**Conductividad**, **Salinidad**-**Transpariencia**, **Conductividad**-**Transpariencia**, y **Dureza**-**Conductividad**. . Lo que nos indica que estás variables estarán correlacionadas al estar en valores altos o bajos en los sitios. Por otro lado, no se observan relaciones negativas fuertes entre las varibales ambientales.
+
+```{r, warning=FALSE, message=FALSE}
+#| label: fig-fig5
+#| fig-cap: Relaciones lineales comparando datos ambientales en los diferentes ríos muestreados. Las elipses azules representas relaciones positivas y las rojas representan relaciones negativas.
+
+
+amb_abrev <- largo_amb %>%
+  select(Sitios, Abrev, Valores) %>%
+  pivot_wider(names_from = Abrev, values_from = Valores)  #convertir a formato ancho
+
+columnas_filamb <- c("pH", "Cndc", "Slnt", "Trns", "Oxyg", "CrbD", "Alkl", "NO2", "NO3", "Ammn", "Hrdn", "Phsp", "TDS")
+J <- cor(amb_abrev[columnas_filamb])
+corrplot(J, method = "ellipse")
+```
+
+------------------------------------------------------------------------
+
+## Figura de elipses de los datos ambientales y biológicos con las abundancias convertidas a logaritmo (`log10`)
+
+La @fig-fig6 muestra las relaciones entre las especies de peces y las variables ambientales evaluadas. La mayoria de las abundancias de epecies no tuvieron relaciones fuertes positivas o negativas con las variables ambientales. Sin embargo, algunas variables ambientales tuvieron relaciones positivas leves con las abundancias, como lo son **Alcalinidad** con las abundancias de *Gambusia regani*, *Gambusia* sp. y *Micropterus* sp*.* Por otro lado, **Conductuvidad** tuvo una relación negativa media con la especie *Astyanax mexicanus*.
+
+```{r, warning=FALSE, message=FALSE}
+#| label: fig-fig6
+#| fig-cap: Relaciones lineales comparando datos ambientales vs biologicos en los diferentes ríos muestreados. Las elipses azules representas relaciones positivas y las rojas representan relaciones negativas.
+
+
+#  Unir las bases de datos por "Sitios"
+datos_combinados <- amb_abrev %>%
+  inner_join(biol_log, by = "Sitios")  # Mantiene solo sitios en común
+
+# Seleccionar variables ambientales y biológicas
+datos_amb <- datos_combinados %>% select(all_of(columnas_filamb))  # Variables ambientales
+datos_biol <- datos_combinados %>% select(all_of(columnas_filbiol2))  # Variables biológicas
+
+
+#  Calcular la correlación entre las variables ambientales y biológicas
+Mamb_biol <- cor(datos_amb, datos_biol, use = "pairwise.complete.obs")  # Pariwise.complete.obs sirve para ignorar los valores faltantes solo en las comparaciones que ocurren
+
+# matriz de elipses
+corrplot(Mamb_biol, method = "ellipse")
+```
+
+------------------------------------------------------------------------
+
+## Nueva columna con los ríos a los que pertenece cada sitio muestreado
+
+```{r}
+biol_amb$Sitios = as.factor(biol_amb$Sitios)
+biol_amb <- biol_amb %>% 
+  mutate(Rios = case_when(
+    Sitios %in% c("1M", "2M", "3P") ~ "Arroyo Grande",
+    Sitios %in% c("4M", "5M", "6P", "7P", "8M") ~ "Corona",
+    Sitios %in% c("9P", "10P") ~ "Palmas",
+    Sitios %in% c("11M", "12M", "13M", "14M", "15P", "16P") ~ "Pilón",
+    Sitios %in% c("17M", "18M", "19P", "20M", "21P", "22P", "23P") ~ "Purificación",
+    Sitios %in% c("25M", "26M", "27P") ~ "San Carlos",
+    Sitios %in% c("28M", "29M", "30M", "31M", "32M") ~ "San Felipe",
+    Sitios %in% c("33M", "34M", "35M") ~ "San Marcos",
+    Sitios %in% c("36M", "37P", "38M") ~ "Santa Ana",
+    Sitios %in% c("39P", "40P", "41P", "42RM", "43RM") ~ "Soto la Marina",
+    TRUE ~ "Otro" 
+  ))
+```
+
+------------------------------------------------------------------------
+
+## Relacion entre la abundancia y el pH
+
+```{r}
+# Convertir la variable pH a categórica
+biol_amb <-
+  biol_amb %>% 
+  mutate(pH_level = case_when(
+    pH <= quantile(pH, 1/3) ~ "Bajo",
+    pH <= quantile(pH, 2/3) ~ "Medio",
+    pH <= quantile(pH, 3/3) ~ "Alto",
+  ))
+```
+
+La @fig-fig7 muestra la distribución de las abundancias de peces en los diferentes ríos muestreados según el nivel de pH, categorizado en tres diferentes niveles: Bajo (morado), Medio (naranja) y Alto (rojo). Se observa que la abundancia varía considerablemente entre los ríos y los niveles de pH; en algunos ríos como **San Felipe** y **San Marcos**,la abundancia es mayor en condiciones de pH alto, mientras que en otros como **Pilón** y **Purificación**, los valores son más dispersos.
+
+```{r, warning=FALSE, message=FALSE}
+#| label: fig-fig7
+#| fig-cap: Grafico de cajas comparando las abundancias en distintos niveles de pH en los Ríos.
+
+#Gráfica de la relacion entre la abundancia y el pH
+ggplot(biol_amb, aes(x = factor(Rios), y = Abundancia, fill = pH_level)) +
+  geom_boxplot(alpha = 0.7) +  
+  scale_y_log10() +
+  labs(title = "Distribución de la Abundancia según Nivel de pH",
+       x = "Ríos muestreados",
+       y = "Abundancia en escala log10",
+       fill = "Nivel de pH") +
+  theme_bw() +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold", size = 14),  # Centrar el título
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)  # Rotar nombres de ríos en 45°
+  ) +
+  scale_fill_manual(values = c("Bajo" = "blue", "Medio" = "orange", "Alto" = "red"))
+
+```
+
+------------------------------------------------------------------------
+
+## Relacion entre la abundancia y la Alcalinidad
+
+```{r}
+# Convertir la variable Alcalinidad a categórica
+biol_amb <-
+  biol_amb %>% 
+  mutate(Alkalinity_level = case_when(
+    Alkalinity <= quantile(Alkalinity, 1/3) ~ "Bajo",
+    Alkalinity <= quantile(Alkalinity, 2/3) ~ "Medio",
+    Alkalinity <= quantile(Alkalinity, 3/3) ~ "Alto",
+  ))
+```
+
+La @fig-fig8 muestra la distribución de las abundancias de peces en los diferentes ríos muestreados según el nivel de Alcalinidad, categorizado en tres diferentes niveles: Bajo (amarillo claro), Medio (amarillo oscuro) y Alto (naranja). Se observa que la abundancia varía entre ríos y niveles de Alcalinidad. En **San Marcos** y **Santa Ana**, la abundancia parece ser mayor en condiciones de alta alcalinidad. Por el contrario, en sitios como **Purificación** y **San Carlos**, los valores están más distribuidos entre los diferentes niveles de alcalinidad
+
+```{r, warning=FALSE}
+#| label: fig-fig8
+#| fig-cap: Grafico de cajas comparando las abundancias en distintos niveles de Alcalinidad en los Ríos.
+
+# Crear gráfico con etiquetas de valores atípicos redondeados
+ggplot(biol_amb, aes(x = factor(Rios), y = Abundancia, fill = Alkalinity_level)) +
+  geom_boxplot(alpha = 0.7) +  
+  scale_y_log10()+
+  labs(title = "Distribución de la Abundancia según el Nivel de alcalinidad",
+       x = "Nivel de alcalinidad",
+       y = "Abundancia en escala log10",
+       fill = "Nivel de alcalinidad") +
+  theme_bw() +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold", size = 14),  #Centrar el título
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)  # Rotar nombres de ríos en 45°
+  ) +
+  scale_fill_manual(values = c("Bajo" = "#ffeda0", "Medio" = "#feb24c", "Alto" = "#f03b20"))
+```
+
+------------------------------------------------------------------------
+
+## Regresión lineal entre la abundancia y la Alcalinidad
+
+En la @fig-fig9 muestra una regresión lineal entre la abundancia y la alcalinidad. Se puede observar un comportamiento lineal positivo de las abundancias respecto a la alcalinidad, donde a medida que va en aumento los valores de **Alcalinidad**, a su vez lo hara las abundancias de peces. Sin embargo, es importante mencionar que los datos muestran un comportamiento disperso respecto a la linea de tendencia, esto quiere decir que la alcalinidad no es la unica variable que le da forma a las abundancias , debido a que la suma de otras variables ambientales pueden estar dando forma a como se distribuyen las abundancias de peces en los sitios.
+
+```{r, warning=FALSE, message=FALSE}
+#| label: fig-fig9
+#| fig-cap: Grafico de regresiones lineales comparando las abundancias en distintos niveles de alcalinidad en los Ríos.
+
+#Figuras de regresión entre la abundancia y la Alcalinidad
+ggplot(biol_amb, aes(x = Alkalinity, y = Abundancia) )+
+   geom_point(aes(color = Rios), size = 3) +
+  geom_smooth(method= "lm") + 
+  scale_y_log10() +
+  labs(title = "Distribución de la Abundancia según Nivel de Alcalinidad",
+       x = "Nivel de alcalinidad",
+       y = "Abundancia en escala log10")+
+  theme_bw() +
+  theme(panel.grid = element_blank()
+  )
+```
+
+------------------------------------------------------------------------
+
+## Regresión suavizada entre la abundancia y la Alcalinidad
+
+En la @fig-fig10 muestra una regresión suavizada entre la abundancia y la alcalinidad. Se observa una relación de tipo no lineal, que al ser suavizada se ajusta en mejor medida a los datos dispersos, con una mayor abundancia en niveles bajos y altos de alcalinidad, pero menor en niveles intermedios. La abundancia es alta y dispersa en alcalinidad baja (0-50) y disminuye en valores medios (\~50-150) y vuelve a aumentar con variabilidad en niveles más altos (\~150-400).
+
+```{r, message=FALSE, warning=FALSE}
+#| label: fig-fig10
+#| fig-cap: Grafico de regresiones suavizadas comparando las abundancias en distintos niveles de alcalinidad en los Ríos.
+
+#Figuras de regresión entre la abundancia y la Alcalinidad
+ggplot(biol_amb, aes(x = Alkalinity, y = Abundancia) )+
+   geom_point(aes(color = Rios), size = 3) +
+  geom_smooth(span = 0.4) + 
+  scale_y_log10() +
+  labs(title = "Distribución de la Abundancia según Nivel de Alcalinidad",
+       x = "Nivel de alcalinidad",
+       y = "Abundancia en escala log10")+
+  theme_bw() +
+  theme(panel.grid = element_blank()
+  )
+```
+
+------------------------------------------------------------------------
+
+## Regresión lineal entre la abundancia y el pH
+
+La @fig-fig11 muestra una regresión lineal entre la abundancia y el pH. Se observa un leve comportamiento positvo, sin embargo, esta no es lo suficientemente fuerte. Además, se observa una alta dispersión de los datos, lo que nos indica que el **pH** por si mismo no le dará forma a la distribución de las abundancias, si no que puede que la suma de otras variables ambientales lo van a determinar. Se puede observar también una alta variabilidad en ciertos rangos, lo que sugiere que otros factores pueden estar influyendo en la relación.
+
+```{r, warning=FALSE, message=FALSE}
+#| label: fig-fig11
+#| fig-cap: Grafico de regresiones lineales comparando las abundancias en distintos niveles de pH en los Ríos.
+
+# Regresion lineal entre la abundancia y el pH
+ggplot(biol_amb, aes(x= pH, y= Abundancia)  ) +
+   geom_point(aes(color = Rios), size = 3) +
+  geom_smooth(method= "lm")+
+  scale_y_log10() +
+  labs(title = "Relación de la Abundancia según Nivel de pH",
+       x = "Nivel de pH",
+       y = "Abundancia en escala log10")+
+  theme(panel.grid = element_blank())
+```
+
+------------------------------------------------------------------------
+
+## Regresión suavizada entre la abundancia y el pH
+
+La @fig-fig12 muestra la variación de la abundancia de organismo (en escala logarítmica) en función del **pH** del agua en los diferentes ríos muestreados. La curva de regresión suavizada sugiere que la abundancia es menor en valores cercanos a 6.5, aunmenta gradualmente al rededor de 7.5 y luego presenta variaciones a medida que el pH se acerca a 8. La variabilidad es alta en valores extremos de pH, lo que sugiere que otros factores pueden estar influyendo en la abundancia.
+
+```{r, warning=FALSE, message=FALSE}
+#| label: fig-fig12
+#| fig-cap: Grafico de regresiones suavizadas comparando las abundancias en distintos niveles de pH en los Ríos.
+
+# Regresion lineal entre la abundancia y el pH
+ggplot(biol_amb, aes(x= pH, y= Abundancia)  ) +
+   geom_point(aes(color = Rios), size = 3) +
+  geom_smooth(span = 0.4)+
+  scale_y_log10() +
+  labs(title = "Relación de la Abundancia según Nivel de pH",
+       x = "Nivel de pH",
+       y = "Abundancia en escala log10")+
+  theme(panel.grid = element_blank())
+```
+
+------------------------------------------------------------------------
+
+## Grafico de burbujas
+
+En la @fig-fig13 se puede observar que las abundancias estuvieron entre el nivel de pH 6.5 y 8.4, donde fuera de este rango no se registraron muchos individuos. La especie que mayores abundancias regitraron fueron: Gmbr con 1500 individuos en un nivel de 7.4 y Pcml con 1500 individuos a un nivel de 8. El río Arroyo Grande tuvo restringidas sus abundancias en el nivel de pH 6.7. Las abundancias de especies como Pclf, Hrcc y Astm se distribuyeron uniformemente entre los valores de pH 6.5 y 8.4 con menos de 500 individuos por sitio.
+
+```{r, warning=FALSE, message=FALSE}
+#| label: fig-fig13
+#| fig-cap: Grafico de burbujas comparando las abundancias con el nivel de pH en los diferentes Ríos.
+
+# Abreviar nombres de los grupos taxonómicos
+biol_amb <-
+  biol_amb %>% 
+  mutate(Abrev = abbreviate(Especie, minlength = 4)) %>% 
+  filter(Abundancia>10)
+
+  # Crear el gráfico de burbujas
+ggplot(biol_amb, aes(x = pH, y = Abrev, size = Abundancia, color = Rios)) +
+  geom_point(alpha = 0.7) +  # Transparencia para mejor visualización
+  scale_size(range = c(1, 8)) + 
+  scale_x_continuous(limits = c(6, 9), 
+                     breaks = seq(6, 9, by = 0.5)) + 
+  theme_bw() +
+  theme(
+    panel.grid = element_blank(),
+    axis.ticks.y = element_blank(),
+    axis.text.x = element_text(size = 12),
+    axis.title.x = element_text(size = 14, face = "bold"),  # Título del eje X más visible
+    axis.title.y = element_blank()
+  ) +
+  
+    # Líneas verticales grises
+  geom_vline(xintercept = seq(6, 9, by = 1), color = "gray", linetype = "dashed") + 
+  # Circulos de la abundancia en la leyenda
+  guides(
+    size = guide_legend(title = NULL, 
+                        override.aes = list(shape = 1, 
+                                            color = "#377eb8",
+                                            stroke = 1.2)),  
+  # Circulos de las Layers en la leyenda
+color = guide_legend(title = NULL)   #  Eliminar el título de la leyenda para "group"
+  )
+
+```
+
+------------------------------------------------------------------------
+
+```{r}
+abundancia <- Abundantes %>%
+  select(`Especie`, `Abundancia_Total`)
+
+# Ordena las especies por abundancia en orden descendente
+abundancia_ordenada <- abundancia %>%
+  arrange(desc(`Abundancia_Total`))
+
+# Agrega una columna con el rango (posición) de cada especie
+abundancia_ordenada <- abundancia_ordenada %>%
+  mutate(Rango = row_number())
+
+# Crea la figura de rango de abundancia (RAD)
+ggplot(abundancia_ordenada, aes(x = Rango, y = Abundancia_Total)) +
+  geom_line(color = "blue", size = 1) +  # Línea que conecta los puntos
+  geom_point(color = "red", size = 3) +  # Puntos para cada especie
+  scale_x_continuous(trans = "log10") +  # Escala logarítmica en el eje X (opcional)
+  scale_y_continuous(trans = "log10") +  # Escala logarítmica en el eje Y (opcional)
+  labs(
+    title = "Figura de Rango de Abundancia (RAD)",
+    x = "Rango (log10)",
+    y = "Abundancia (log10)"
+  ) +
+  theme_minimal()  # Estilo minimalista para la gráfica
+```
+
+------------------------------------------------------------------------
+
+## Referencias bibliográficas
+
+1.  De Catalunya, U. O., Ventura, C., & Fernando, C. B. (2018). *Empleo de modelos estadísticos multivariantes para el análisis de comportamiento de comunidades ecológicas*. <http://hdl.handle.net/10609/72629>
+2.  González, A.R. (2017). Ecología aplicada: diseño y análisis estadístico.
+3.  Ospina, J.S., López-Delgado, E.O., & Villa-Navarro, F.A. (2023). Estructura y diversidad de las comunidades ícticas a lo largo de un gradiente longitudinal en ríos costeros de la Sierra Nevada de Santa Marta. *Revista de la Academia Colombiana de Ciencias Exactas, Físicas y Naturales*.
+4.  Torrruco, D., González, A., & González, Á. T. (2017). Diversidad y distribución de peces y su relación con variables ambientales, en el sur del Golfo de México. *Revista de Biología Tropical*, *66*(1), 438. https://doi.org/10.15517/rbt.v66i1.26255
+
+------------------------------------------------------------------------
